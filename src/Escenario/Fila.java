@@ -3,6 +3,10 @@ package Escenario;
 import java.util.LinkedList;
 import java.util.List;
 
+import Entidades.Planta;
+import Entidades.Proyectil;
+import Entidades.Zombie;
+
 public class Fila {
 	
 	protected List<Zombie> filaZombie;

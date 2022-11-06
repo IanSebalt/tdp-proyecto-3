@@ -1,15 +1,21 @@
 package Fabricas;
 
+import Entidades.Cactus;
+import Entidades.PlantaDisparadora;
+import Entidades.PlantaGeneradora;
+import Entidades.PlantaRobusta;
+import Entidades.SetaDesesporada;
+import Entidades.SetaSolar;
 
 public class FabricaPlantaNoche implements FabricaPlanta{
 	public PlantaDisparadora getPlantaDisparadora() {
-		return new Seta_Desesporadora();
+		return new SetaDesesporada();
 	}
 	public PlantaRobusta getPlantaRobusta() {
 		return new Cactus();
 	}
 	public PlantaGeneradora getPlantaGeneradora() {
-		return new Seta_Solar();
+		return new SetaSolar();
 	}
 }
 

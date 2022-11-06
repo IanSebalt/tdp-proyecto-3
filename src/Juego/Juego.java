@@ -1,5 +1,8 @@
 package Juego;
 
+import Entidades.Planta;
+import Entidades.Proyectil;
+import Entidades.Zombie;
 import Escenario.Grilla;
 import Hilos.Control;
 
