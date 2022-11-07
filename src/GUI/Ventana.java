@@ -29,6 +29,7 @@ public class Ventana {
 	private JPanel panelJuego;
 	private JPanel panelTablero;
 	private int plantaClick;
+	private JButton btnNewButton_1;
 
 	/**
 	 * Launch the application.
@@ -82,6 +83,19 @@ public class Ventana {
 		});
 		btnJugar.setBounds(583, 265, 89, 23);
 		panelMenu.add(btnJugar);
+		
+		JButton btnNewButton = new JButton("Salir");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		btnNewButton.setBounds(583, 328, 89, 23);
+		panelMenu.add(btnNewButton);
+		
+		btnNewButton_1 = new JButton("Manual");
+		btnNewButton_1.setBounds(583, 299, 89, 23);
+		panelMenu.add(btnNewButton_1);
 	}
 	
 	public void crearZombie(Zombie z) {
@@ -175,7 +189,6 @@ public class Ventana {
 		if(plantaClick != 0) {
 			Planta plantaE = Juego.obtenerInstancia(null).generarPlanta(plantaClick, j.getX() / 100, j.getY() / 100);
 			if(plantaE != null) {
-				System.out.println("Asd");
 				Sprite planta = plantaE.getSprite();
 				planta.setBounds(0, 0, 100, 100);
 				ImageIcon img = planta.getImg();
