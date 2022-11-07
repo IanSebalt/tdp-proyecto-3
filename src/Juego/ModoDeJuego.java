@@ -1,5 +1,8 @@
 package Juego;
 
+import Entidades.*;
+import Fabricas.*;
+
 public abstract class ModoDeJuego {
 	
 	protected Juego miJuego;
@@ -8,18 +11,17 @@ public abstract class ModoDeJuego {
 	
 	protected FabricaPlanta fabricaPlan;
 	
-	public ModoDeJuego(Juego j) {
-		this.miJuego = j;		
-	}
 	
 	public abstract void accionModo();
 		
-	public abstract Planta generarPlanta(char c);
+	public abstract Planta generarPlanta(int i);
 
 	public abstract Zombie generarZombie(char c);
 	
 	public abstract String getFondo();
 	
-	public abstract String getCesped();	
+	public abstract String[] getCesped();	
+	
+	public abstract String[] getPlantas();
 	
 }

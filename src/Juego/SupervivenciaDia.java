@@ -1,9 +1,11 @@
 package Juego;
 
+import Entidades.*;
+import Fabricas.*;
+
 public class SupervivenciaDia extends ModoDeJuego{	
 	
 	public SupervivenciaDia(Juego j) {
-		super(j);
 		super.fabricaPlan = new FabricaPlantaDia();
 		super.fabricaZom = new FabricaZombieDia();
 	}
@@ -14,15 +16,15 @@ public class SupervivenciaDia extends ModoDeJuego{
 	}
 
 	@Override
-	public Planta generarPlanta(char c) {		
+	public Planta generarPlanta(int c) {		
 		Planta nuevaPlanta = null;
-		if(c == 'a')
+		if(c == 1)
 			nuevaPlanta = fabricaPlan.getPlantaGeneradora();
 		else
-			if(c == 'b')
-				nuevaPlanta = fabricaPlan.getPlantaEspecial();
+			if(c == 2)
+				nuevaPlanta = fabricaPlan.getPlantaRobusta();
 			else
-				if(c == 'c')
+				if(c == 3)
 					nuevaPlanta = fabricaPlan.getPlantaDisparadora();
 		return nuevaPlanta;
 	}
@@ -31,26 +33,28 @@ public class SupervivenciaDia extends ModoDeJuego{
 	public Zombie generarZombie(char c) {
 		Zombie nuevoZombie = null;
 		if(c == 'a')
-			nuevoZombie = fabricaPlan.getZombieComun();
+			nuevoZombie = fabricaZom.getZombieComun();
 		else
 			if(c == 'b')
-				nuevoZombie = fabricaPlan.getZombieEspecial();
+				nuevoZombie = fabricaZom.getZombieEspecial();
 			else
 				if(c == 'c')
-					nuevoZombie = fabricaPlan.getZombieRobusto();
+					nuevoZombie = fabricaZom.getZombieRobusto();
 		return nuevoZombie;
 	}
-
-	@Override
+	
 	public String getFondo() {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
-	@Override
-	public String getCesped() {
-		// TODO Auto-generated method stub
-		return null;
+	
+	public String[] getCesped() {
+		String[] retornar =  {"/imagenes/grasstile.png", "/imagenes/grasstile-hovered.png"};
+		return retornar;
 	}
 
+	public String[] getPlantas() {
+		String[] retornar = {"/imagenes/sunflower.gif", "/imagenes/wallnut.gif", "/imagenes/lanzaguisantes.gif"};
+		return retornar;
+	}
 }

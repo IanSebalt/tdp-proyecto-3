@@ -1,15 +1,15 @@
 package Escenario;
 
 import java.util.LinkedList;
-import java.util.List;
+import Entidades.*;
 
 public class Fila {
 	
-	protected List<Zombie> filaZombie;
+	protected LinkedList<Zombie> filaZombie;
 	
 	protected Planta filaPlanta [];
 	
-	protected List<Proyectil> filaProyectil;
+	protected LinkedList<Proyectil> filaProyectil;
 	
 	public Fila() {
 		filaZombie = new LinkedList<Zombie>();
@@ -17,7 +17,7 @@ public class Fila {
 		filaProyectil = new LinkedList<Proyectil>();
 	}
 	
-	public List<Zombie> getFilaZombie(){
+	public LinkedList<Zombie> getFilaZombie(){
 		return filaZombie;
 	}
 	
@@ -25,7 +25,7 @@ public class Fila {
 		return filaPlanta;
 	}
 	
-	public List<Proyectil> getFilaProyectil(){
+	public LinkedList<Proyectil> getFilaProyectil(){
 		return filaProyectil;
 	}
 	

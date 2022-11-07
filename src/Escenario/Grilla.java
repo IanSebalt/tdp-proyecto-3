@@ -1,13 +1,15 @@
 package Escenario;
 
 import java.util.LinkedList;
+import Entidades.*;
 
 public class Grilla {
 	
 	protected Fila matriz [];		
 	
 	public Grilla(int filas, int col) {
-		for(int i = 0; i<filas; i++)			
+		matriz = new Fila[filas];
+		for(int i = 0; i<filas; i++)		
 			this.matriz[i] = new Fila();
 	}
 	
@@ -17,7 +19,7 @@ public class Grilla {
 	
 	public void setPlanta(Planta plan, Coordenada cord) {
 		if(matriz[cord.getY()].getFilaPlanta()[cord.getX()]==null)
-			matriz[cord.getY()].getFilaPlanta()[cord.getX()].addLast(plan);			
+			matriz[cord.getY()].getFilaPlanta()[cord.getX()] = plan;			
 	}
 	
 	public Planta getPlanta(Coordenada cord) {
@@ -29,7 +31,7 @@ public class Grilla {
 	}	
 	
 	public void matarZombie(Zombie z) {
-		matriz[z.getCoordenada().getY()].getFilaProyectil().removeFirstOccurrence(z);	
+		matriz[z.getCoordenada().getY()].getFilaZombie().removeFirstOccurrence(z);	
 	}
 	
 	public void matarPlanta(Coordenada cord) {		
@@ -40,6 +42,10 @@ public class Grilla {
 		}
 		if (planta!=null)
 			planta.morir();
+	}
+	
+	public void matarProyectil(Proyectil p) {
+		matriz[p.getCoordenada().getY()].getFilaProyectil().removeFirstOccurrence(p);
 	}
 	
 	public void moverZombies() {

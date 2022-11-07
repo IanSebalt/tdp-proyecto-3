@@ -1,7 +1,14 @@
 package Juego;
 
+import Escenario.Coordenada;
 import Escenario.Grilla;
+import GUI.Ventana;
 import Hilos.Control;
+import Hilos.ControlZombie;
+
+import java.util.concurrent.ThreadLocalRandom;
+
+import Entidades.*;
 
 public class Juego {
 	
@@ -25,9 +32,9 @@ public class Juego {
 	 */
 	private Juego(Ventana v) {
 		this.miVentana = v;
-		this.miModo = m;
 		this.puntosSoles = 0;
 		this.miControl = new Control(this);		
+		this.miModo = null;
 	}
 	
 	/**
@@ -37,9 +44,9 @@ public class Juego {
 	 * @param v - ventana a utilizar.
 	 * @return el juego.
 	 */
-	public static Juego obtenerInstancia(Ventana v, ModoDeJuego m) {
+	public static Juego obtenerInstancia(Ventana v) {
 		if(instance == null)
-			instance = new Juego(v, m);
+			instance = new Juego(v);
 		return instance;
 	}
 	
@@ -69,12 +76,25 @@ public class Juego {
 		this.miModo = m;
 	}
 	
-	public void generarPlanta(char c) {
-		miModo.generarPlanta(c);
+	public ModoDeJuego getModo() {
+		return miModo;
+	}
+	
+	public Planta generarPlanta(int i, int x, int y) {
+		Planta retornar = null;
+		if(miGrilla.getPlanta(new Coordenada(x, y)) == null) {
+			retornar = miModo.generarPlanta(i);
+			miGrilla.setPlanta(retornar, new Coordenada(x, y));
+		}
+		return retornar;
 	}
 	
 	public void generarZombie() {
-		miGrilla.generarZombie(c);
+		int randomY = ThreadLocalRandom.current().nextInt(1, 5);
+		Zombie z = miModo.generarZombie('a');
+		miGrilla.setZombie(z, randomY);
+		z.setCoordenada(0, randomY);
+		miVentana.crearZombie(z);
 	}
 	
 	public void moverZombies() {
@@ -82,7 +102,7 @@ public class Juego {
 	}
 	
 	public void matarPlanta(Planta p) {
-		miGrilla.matarPlanta(p);
+		miGrilla.matarPlanta(p.getCoordenada());
 	}
 	public void matarZombie(Zombie z) {
 		miGrilla.matarZombie(z);
@@ -91,4 +111,10 @@ public class Juego {
 		miGrilla.matarProyectil(p);
 	}
 	
+	public void empezarJuego() {
+		miGrilla = new Grilla(6, 9);
+		ControlZombie cz = new ControlZombie(this);
+		Thread t1 = new Thread(cz);
+		t1.start();
+	}
 }
