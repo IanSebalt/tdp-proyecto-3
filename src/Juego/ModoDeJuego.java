@@ -1,7 +1,5 @@
 package Juego;
 
-import Entidades.*;
-import Fabricas.*;
 import Entidades.Planta;
 import Entidades.Zombie;
 import Fabricas.FabricaPlanta;
@@ -13,8 +11,7 @@ public abstract class ModoDeJuego {
 	
 	protected FabricaZombie fabricaZom;
 	
-	protected FabricaPlanta fabricaPlan;
-	
+	protected FabricaPlanta fabricaPlan;	
 	
 	public abstract void accionModo();
 		

@@ -1,15 +1,12 @@
 package GUI;
 
 import java.awt.EventQueue;
-import java.awt.GridLayout;
 import java.awt.Image;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.OverlayLayout;
-
 import Entidades.Planta;
 import Entidades.Zombie;
 import Juego.*;
@@ -29,7 +26,6 @@ public class Ventana {
 	private JPanel panelJuego;
 	private JPanel panelTablero;
 	private int plantaClick;
-	private JButton btnNewButton_1;
 
 	/**
 	 * Launch the application.
@@ -84,18 +80,18 @@ public class Ventana {
 		btnJugar.setBounds(583, 265, 89, 23);
 		panelMenu.add(btnJugar);
 		
-		JButton btnNewButton = new JButton("Salir");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
-		btnNewButton.setBounds(583, 328, 89, 23);
-		panelMenu.add(btnNewButton);
+		btnSalir.setBounds(583, 328, 89, 23);
+		panelMenu.add(btnSalir);
 		
-		btnNewButton_1 = new JButton("Manual");
-		btnNewButton_1.setBounds(583, 299, 89, 23);
-		panelMenu.add(btnNewButton_1);
+		JButton btnManual = new JButton("Manual");
+		btnManual.setBounds(583, 299, 89, 23);
+		panelMenu.add(btnManual);
 	}
 	
 	public void crearZombie(Zombie z) {

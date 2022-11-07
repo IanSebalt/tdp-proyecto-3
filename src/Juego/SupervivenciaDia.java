@@ -1,8 +1,6 @@
 package Juego;
 
 
-import Entidades.*;
-import Fabricas.*;
 import Entidades.Planta;
 import Entidades.Zombie;
 import Fabricas.FabricaPlantaDia;

@@ -1,6 +1,5 @@
 package Escenario;
 
-import java.util.LinkedList;
 import Entidades.*;
 
 import Entidades.Planta;
