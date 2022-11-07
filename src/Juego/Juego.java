@@ -1,6 +1,10 @@
 package Juego;
 
+
 import Escenario.Coordenada;
+import Entidades.Planta;
+import Entidades.Proyectil;
+import Entidades.Zombie;
 import Escenario.Grilla;
 import GUI.Ventana;
 import Hilos.Control;

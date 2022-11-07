@@ -1,7 +1,14 @@
 package Juego;
 
+<<<<<<< HEAD
 import Fabricas.*;
 import Entidades.*;
+=======
+import Entidades.Planta;
+import Entidades.Zombie;
+import Fabricas.FabricaPlantaNoche;
+import Fabricas.FabricaZombieNoche;
+>>>>>>> 585ad22b68b45bd67e888da5bba95b88d7092293
 
 public class SupervivenciaNoche extends ModoDeJuego{
 	
@@ -23,7 +30,11 @@ public class SupervivenciaNoche extends ModoDeJuego{
 		if(c == 1)
 			nuevaPlanta = fabricaPlan.getPlantaGeneradora();
 		else
+<<<<<<< HEAD
 			if(c == 2)
+=======
+			if(c == 'b')
+>>>>>>> 585ad22b68b45bd67e888da5bba95b88d7092293
 				nuevaPlanta = fabricaPlan.getPlantaRobusta();
 			else
 				if(c == 3)
@@ -35,7 +46,11 @@ public class SupervivenciaNoche extends ModoDeJuego{
 	public Zombie generarZombie(char c) {
 		Zombie nuevoZombie = null;
 		if(c == 'a')
+<<<<<<< HEAD
 			nuevoZombie = fabricaZom.getZombieComun();
+=======
+			nuevoZombie = fabricaZom.getZombieBasico();
+>>>>>>> 585ad22b68b45bd67e888da5bba95b88d7092293
 		else
 			if(c == 'b')
 				nuevoZombie = fabricaZom.getZombieEspecial();

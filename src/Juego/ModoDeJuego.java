@@ -1,7 +1,14 @@
 package Juego;
 
+<<<<<<< HEAD
 import Entidades.*;
 import Fabricas.*;
+=======
+import Entidades.Planta;
+import Entidades.Zombie;
+import Fabricas.FabricaPlanta;
+import Fabricas.FabricaZombie;
+>>>>>>> 585ad22b68b45bd67e888da5bba95b88d7092293
 
 public abstract class ModoDeJuego {
 	

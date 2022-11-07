@@ -3,6 +3,9 @@ package Escenario;
 import java.util.LinkedList;
 import Entidades.*;
 
+import Entidades.Planta;
+import Entidades.Zombie;
+
 public class Grilla {
 	
 	protected Fila matriz [];		
