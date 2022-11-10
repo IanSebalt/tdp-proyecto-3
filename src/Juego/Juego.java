@@ -86,9 +86,10 @@ public class Juego {
 	
 	public Planta generarPlanta(int i, int x, int y) {
 		Planta retornar = null;
-		if(miGrilla.getPlanta(new Coordenada(x, y)) == null) {
-			retornar = miModo.generarPlanta(i);
-			miGrilla.setPlanta(retornar, new Coordenada(x, y));
+		Coordenada c = new Coordenada(x,y);
+		if(miGrilla.getPlanta(c) == null) {
+			retornar = miModo.generarPlanta(i, c);
+			miGrilla.setPlanta(retornar, c);
 		}
 		return retornar;
 	}
@@ -98,7 +99,12 @@ public class Juego {
 		Zombie z = miModo.generarZombie('a');
 		miGrilla.setZombie(z, randomY);
 		z.setCoordenada(0, randomY);
-		miVentana.crearZombie(z);
+		miVentana.crearEntidad(z);
+	}
+	
+	public void generarProyectil(Coordenada c, Proyectil p) {
+		miGrilla.setProyectil(p, c);
+		miVentana.crearEntidad(p);
 	}
 	
 	public void moverZombies() {

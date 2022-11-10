@@ -1,9 +1,9 @@
 package Juego;
 
-import Fabricas.*;
 import Entidades.*;
 import Entidades.Planta;
 import Entidades.Zombie;
+import Escenario.Coordenada;
 import Fabricas.FabricaPlantaNoche;
 import Fabricas.FabricaZombieNoche;
 
@@ -22,16 +22,16 @@ public class SupervivenciaNoche extends ModoDeJuego{
 	}
 
 	@Override
-	public Planta generarPlanta(int c) {
+	public Planta generarPlanta(int c, Coordenada coord) {
 		Planta nuevaPlanta = null;
 		if(c == 1)
-			nuevaPlanta = fabricaPlan.getPlantaGeneradora();
+			nuevaPlanta = fabricaPlan.getPlantaGeneradora(coord);
 		else
 			if(c == 2)
-				nuevaPlanta = fabricaPlan.getPlantaRobusta();
+				nuevaPlanta = fabricaPlan.getPlantaRobusta(coord);
 			else
 				if(c == 3)
-					nuevaPlanta = fabricaPlan.getPlantaDisparadora();
+					nuevaPlanta = fabricaPlan.getPlantaDisparadora(coord);
 		return nuevaPlanta;		
 	}
 

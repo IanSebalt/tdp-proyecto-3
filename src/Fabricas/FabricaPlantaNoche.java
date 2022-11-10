@@ -6,16 +6,17 @@ import Entidades.PlantaGeneradora;
 import Entidades.PlantaRobusta;
 import Entidades.SetaDesesporada;
 import Entidades.SetaSolar;
+import Escenario.Coordenada;
 
 public class FabricaPlantaNoche implements FabricaPlanta{
-	public PlantaDisparadora getPlantaDisparadora() {
-		return new SetaDesesporada();
+	public PlantaDisparadora getPlantaDisparadora(Coordenada c) {
+		return new SetaDesesporada(c);
 	}
-	public PlantaRobusta getPlantaRobusta() {
-		return new Cactus();
+	public PlantaRobusta getPlantaRobusta(Coordenada c) {
+		return new Cactus(c);
 	}
-	public PlantaGeneradora getPlantaGeneradora() {
-		return new SetaSolar();
+	public PlantaGeneradora getPlantaGeneradora(Coordenada c) {
+		return new SetaSolar(c);
 	}
 }
 

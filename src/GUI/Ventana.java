@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import Entidades.Entidad;
 import Entidades.Planta;
 import Entidades.Zombie;
 import Juego.*;
@@ -94,11 +96,11 @@ public class Ventana {
 		panelMenu.add(btnManual);
 	}
 	
-	public void crearZombie(Zombie z) {
-		panelGhost.add(z.getSprite());
+	public void crearEntidad(Entidad e) {
+		panelGhost.add(e.getSprite());
 		panelGhost.revalidate();
 		panelGhost.repaint();
-		z.getSprite().mover(1000, z.getCoordenada().getY() * 100);
+		e.getSprite().mover(1000, e.getCoordenada().getY() * 100);
 	}
 	
 	private void funcionJugar() {

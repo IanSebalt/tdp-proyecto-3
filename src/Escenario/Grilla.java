@@ -24,6 +24,10 @@ public class Grilla {
 			matriz[cord.getY()].getFilaPlanta()[cord.getX()] = plan;			
 	}
 	
+	public void setProyectil(Proyectil p, Coordenada c) {
+		matriz[c.getY()].getFilaProyectil().addLast(p);
+	}
+	
 	public Planta getPlanta(Coordenada cord) {
 		Planta toReturn = null;
 		if(matriz[cord.getY()].getFilaPlanta()[cord.getX()]!=null) {

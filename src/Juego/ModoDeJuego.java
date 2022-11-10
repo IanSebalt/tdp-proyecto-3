@@ -2,6 +2,7 @@ package Juego;
 
 import Entidades.Planta;
 import Entidades.Zombie;
+import Escenario.Coordenada;
 import Fabricas.FabricaPlanta;
 import Fabricas.FabricaZombie;
 
@@ -15,7 +16,7 @@ public abstract class ModoDeJuego {
 	
 	public abstract void accionModo();
 		
-	public abstract Planta generarPlanta(int i);
+	public abstract Planta generarPlanta(int i, Coordenada c);
 
 	public abstract Zombie generarZombie(char c);
 	

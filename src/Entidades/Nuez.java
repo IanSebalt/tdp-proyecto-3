@@ -2,17 +2,18 @@ package Entidades;
 
 import javax.swing.ImageIcon;
 
+import Escenario.Coordenada;
 import GUI.Sprite;
-import Juego.Juego;
 
 public class Nuez extends PlantaRobusta {
-	public Nuez() {
+	public Nuez(Coordenada c) {
 		segundos = 0;//Setear segundos;
 		dmg = 0;
 		vida = 200;
 		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/wallnut.gif"));
 		miSprite = new Sprite(img);
 		costo = 100;
+		coord = c;
 	}
 	
 	public void actuar() {

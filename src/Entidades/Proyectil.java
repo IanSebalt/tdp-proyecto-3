@@ -1,12 +1,14 @@
 package Entidades;
 
+import Escenario.Coordenada;
 import Juego.Juego;
 
 public class Proyectil extends Entidad{
 	protected int dmg;
 	
-	public Proyectil(int d) {
+	public Proyectil(int d, Coordenada c) {
 		dmg = d;
+		coord = c;
 	}
 	
 	public void morir() {

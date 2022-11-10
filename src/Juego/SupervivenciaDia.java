@@ -3,6 +3,7 @@ package Juego;
 
 import Entidades.Planta;
 import Entidades.Zombie;
+import Escenario.Coordenada;
 import Fabricas.FabricaPlantaDia;
 import Fabricas.FabricaZombieDia;
 
@@ -19,16 +20,16 @@ public class SupervivenciaDia extends ModoDeJuego{
 	}
 
 	@Override
-	public Planta generarPlanta(int c) {		
+	public Planta generarPlanta(int c, Coordenada coord) {		
 		Planta nuevaPlanta = null;
 		if(c == 1)
-			nuevaPlanta = fabricaPlan.getPlantaGeneradora();
+			nuevaPlanta = fabricaPlan.getPlantaGeneradora(coord);
 		else
 			if(c == 2)
-				nuevaPlanta = fabricaPlan.getPlantaRobusta();
+				nuevaPlanta = fabricaPlan.getPlantaRobusta(coord);
 			else
 				if(c == 3)
-					nuevaPlanta = fabricaPlan.getPlantaDisparadora();
+					nuevaPlanta = fabricaPlan.getPlantaDisparadora(coord);
 		return nuevaPlanta;
 	}
 	public Zombie generarZombie(char c) {
