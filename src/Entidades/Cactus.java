@@ -6,6 +6,7 @@ public class Cactus extends PlantaRobusta{
 		segundos = 0;//Setear segundos;
 		dmg = 5;//Setear dmg;
 		vida = 150;
+		costo = 125;
 	}
 	
 	public void actuar() {

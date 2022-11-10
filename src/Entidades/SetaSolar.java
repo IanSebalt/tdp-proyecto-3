@@ -5,10 +5,11 @@ public class SetaSolar extends PlantaGeneradora{
 		segundos = 1;//Setear segundos;
 		soles = 1;//Setear soles;
 		vida = 100;
+		costo = 25;
 	}
 	
 	public void actuar() {
-		//Falta el actuar
+		//Generaria soles
 	}
 
 	public void morir() {

@@ -1,10 +1,30 @@
 package Entidades;
 
-public abstract class Zombie extends Entidad{
+import Juego.Juego;
+
+public abstract class Zombie extends Entidad implements VisitorZombie{
 	protected int dmg;
 	protected int velocidad;
 	
 	public void mover() {
 		miSprite.mover(miSprite.getX() - velocidad, miSprite.getY());
 	}
+	
+	public void visit(Planta p) {
+		p.recibirDmg(dmg);		
+	}
+	
+	public void morir() {
+		Juego j = Juego.obtenerInstancia(null);
+		j.matarZombie(this);
+	}
+	
+	public void visit(Proyectil p) {
+		p.recibirDmg(1);
+		recibirDmg(p.obtenerDmg());
+		if(vida <= 0) {
+			morir();
+		}
+	}
+
 }

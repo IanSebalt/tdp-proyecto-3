@@ -12,7 +12,8 @@ public class Comun extends ZombieBasico{
 		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/zombie.gif"));
 		miSprite = new Sprite(img);
 	}
-
+	
+	
 	public void morir() {
 		//Falta ver como muere		
 	}

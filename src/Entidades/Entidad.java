@@ -2,11 +2,13 @@ package Entidades;
 
 import Escenario.Coordenada;
 import GUI.Sprite;
+import Juego.Juego;
 
 public abstract class Entidad {
 	protected Sprite miSprite;
 	protected int vida;
-	protected Coordenada cord;
+	protected Coordenada coord;
+	protected Juego miJuego;
 	
 	public abstract void morir();
 	
@@ -18,11 +20,11 @@ public abstract class Entidad {
 	}
 	
 	public Coordenada getCoordenada() {
-		return cord;
+		return coord;
 	}
 	
 	public void setCoordenada(int x, int y) {
-		cord = new Coordenada(x, y);
+		coord = new Coordenada(x, y);
 	}
 
 	public Sprite getSprite() {

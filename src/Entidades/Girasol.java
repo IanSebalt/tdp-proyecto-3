@@ -11,13 +11,13 @@ public class Girasol extends PlantaGeneradora{
 		vida = 100;
 		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/sunflower.gif"));
 		miSprite = new Sprite(img);
+		costo = 50;
 	}
 	
 	public void actuar() {
-		//Falta el actuar
+		//Generaria soles
 	}
 
 	public void morir() {
-		//Falta ver como muere
 	}
 }

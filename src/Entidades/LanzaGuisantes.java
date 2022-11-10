@@ -11,10 +11,11 @@ public class LanzaGuisantes extends PlantaDisparadora{
 		vida = 100;
 		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/lanzaguisantes.gif"));
 		miSprite = new Sprite(img);
+		costo = 100;
 	}
 	
 	public void actuar() {
-		//Falta el actuar
+		new Proyectil(dmg);
 	}
 
 	public void morir() {

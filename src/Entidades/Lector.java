@@ -11,19 +11,20 @@ public class Lector extends ZombieEspecial{
 			diario = true;
 			
 		}
-
-		public void morir() {
-			//Falta ver como muere		
-		}
 		
-		public void recibirDmg(int d) {
-			vida -= d;
-			if(vida <= 0) {
+		public void visit(Proyectil p) {
+			p.recibirDmg(1);
+			recibirDmg(p.obtenerDmg());
+			if(vida<= 0) {
 				morir();
 			} else if(vida <= 80 && diario) {
 				romperDiario();
 			}
 		}
+		
+		public void morir() {
+			//Falta ver como muere		
+		}		
 		
 		private void romperDiario() {
 			diario = false;

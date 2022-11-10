@@ -6,8 +6,8 @@ public class AllStar extends ZombieEspecial{
 		velocidad = 7;//falta ver velocidad, este es mas rapido que los demas
 		dmg = 2; 
 		
-	}
-
+	}	
+	
 	public void morir() {
 		//Falta ver como muere		
 	}

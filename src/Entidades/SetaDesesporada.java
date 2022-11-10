@@ -5,10 +5,11 @@ public class SetaDesesporada extends PlantaDisparadora {
 		segundos = 1;//Setear segundos;
 		dmg = 15;//Setear dmg;
 		vida = 60;
+		costo = 0;
 	}
 	
 	public void actuar() {
-		//Falta el actuar
+		new Proyectil(dmg);
 	}
 
 	public void morir() {
