@@ -1,5 +1,7 @@
 package Entidades;
 
+import java.awt.Rectangle;
+
 import Juego.Juego;
 
 public abstract class Zombie extends Entidad implements VisitorZombie{
@@ -8,6 +10,7 @@ public abstract class Zombie extends Entidad implements VisitorZombie{
 	
 	public void mover() {
 		miSprite.mover(miSprite.getX() - velocidad, miSprite.getY());
+		miRectangulo.setLocation(miSprite.getX() - velocidad, miSprite.getY());
 	}
 	
 	public void visit(Planta p) {
@@ -26,5 +29,6 @@ public abstract class Zombie extends Entidad implements VisitorZombie{
 			morir();
 		}
 	}
+	
 
 }

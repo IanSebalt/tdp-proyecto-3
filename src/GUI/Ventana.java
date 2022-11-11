@@ -103,6 +103,10 @@ public class Ventana {
 		e.getSprite().mover(1000, e.getCoordenada().getY() * 100);
 	}
 	
+	public void eliminarEntidad(Planta p) {		
+		
+	}
+	
 	private void funcionJugar() {
 		String [] opciones = {"Dia", "Noche"};
 		Juego j = Juego.obtenerInstancia(this);

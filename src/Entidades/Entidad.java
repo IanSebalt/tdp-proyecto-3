@@ -1,5 +1,7 @@
 package Entidades;
 
+import java.awt.Rectangle;
+
 import Escenario.Coordenada;
 import GUI.Sprite;
 import Juego.Juego;
@@ -9,6 +11,7 @@ public abstract class Entidad {
 	protected int vida;
 	protected Coordenada coord;
 	protected Juego miJuego;
+	protected Rectangle miRectangulo;
 	
 	public abstract void morir();
 	
@@ -29,5 +32,9 @@ public abstract class Entidad {
 
 	public Sprite getSprite() {
 		return miSprite;
+	}
+	
+	public Rectangle getRectangulo(){
+		return miRectangulo;
 	}
 }

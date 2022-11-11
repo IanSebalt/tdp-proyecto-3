@@ -1,5 +1,7 @@
 package Entidades;
 
+import java.awt.Rectangle;
+
 import javax.swing.ImageIcon;
 
 import Escenario.Coordenada;
@@ -15,6 +17,7 @@ public class LanzaGuisantes extends PlantaDisparadora{
 		miSprite = new Sprite(img);
 		costo = 100;
 		coord = c;
+		miRectangulo = new Rectangle(0,0,100,100);
 	}
 	
 	public void actuar() {
@@ -24,7 +27,8 @@ public class LanzaGuisantes extends PlantaDisparadora{
 	}
 
 	public void morir() {
-		//Falta ver como muere
+		Juego j = Juego.obtenerInstancia(null);
+		j.matarPlanta(this);
 	}
 	
 }

@@ -22,8 +22,10 @@ public class SupervivenciaDia extends ModoDeJuego{
 	@Override
 	public Planta generarPlanta(int c, Coordenada coord) {		
 		Planta nuevaPlanta = null;
-		if(c == 1)
+		if(c == 1) {
 			nuevaPlanta = fabricaPlan.getPlantaGeneradora(coord);
+		}
+			
 		else
 			if(c == 2)
 				nuevaPlanta = fabricaPlan.getPlantaRobusta(coord);

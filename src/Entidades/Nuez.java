@@ -1,5 +1,7 @@
 package Entidades;
 
+import java.awt.Rectangle;
+
 import javax.swing.ImageIcon;
 
 import Escenario.Coordenada;
@@ -14,6 +16,7 @@ public class Nuez extends PlantaRobusta {
 		miSprite = new Sprite(img);
 		costo = 100;
 		coord = c;
+		miRectangulo = new Rectangle(0,0,100,100);
 	}
 	
 	public void actuar() {
