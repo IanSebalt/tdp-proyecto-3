@@ -11,8 +11,8 @@ public class ControlPlanta extends Control{
 	public void run() {
 		while(continuar){
 			try {
-				//TODO métodos a controlar por el hilo				
-				Thread.sleep(1000);				
+				Thread.sleep(1000);
+				miJuego.actuarPlantas();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

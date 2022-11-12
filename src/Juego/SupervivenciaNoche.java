@@ -1,6 +1,5 @@
 package Juego;
 
-import Entidades.*;
 import Entidades.Planta;
 import Entidades.Zombie;
 import Escenario.Coordenada;
@@ -9,16 +8,20 @@ import Fabricas.FabricaZombieNoche;
 
 public class SupervivenciaNoche extends ModoDeJuego{
 	
+	protected int cronometro;
 	
 	public SupervivenciaNoche(Juego j) {
 		super.fabricaPlan = new FabricaPlantaNoche();
 		super.fabricaZom = new FabricaZombieNoche();
+		this.cronometro = 0;
 	}
 
-	@Override
-	public void accionModo() {
-		// TODO Auto-generated method stub
-		
+	public void accionModo(int seg) {
+		if (cronometro == 10000) {
+			//TODO generar lápidas
+			cronometro = 0;
+		}
+		cronometro += seg;
 	}
 
 	@Override

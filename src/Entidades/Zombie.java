@@ -1,7 +1,5 @@
 package Entidades;
 
-import java.awt.Rectangle;
-
 import Juego.Juego;
 
 public abstract class Zombie extends Entidad implements VisitorZombie{

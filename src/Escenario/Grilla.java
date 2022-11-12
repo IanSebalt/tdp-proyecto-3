@@ -11,7 +11,7 @@ public class Grilla {
 	
 	protected Fila matriz [];		
 	
-	public Grilla(int filas, int col) {
+	public Grilla(int filas) {
 		matriz = new Fila[filas];
 		for(int i = 0; i<filas; i++)		
 			this.matriz[i] = new Fila();
@@ -48,8 +48,8 @@ public class Grilla {
 			planta = matriz[cord.getY()].getFilaPlanta()[cord.getX()];
 			matriz[cord.getY()].getFilaPlanta()[cord.getX()] = null;
 		}
-		//if (planta!=null)
-		//	planta.morir();
+		if (planta!=null)
+			planta.morir();
 	}
 	
 	public void matarProyectil(Proyectil p) {
@@ -107,6 +107,18 @@ public class Grilla {
 				}
 			}
 		}
+	}
+
+	public void actuarPlantas() {
+		for(int i = 0; i<matriz.length; i++)
+			for(Planta p : matriz[i].getFilaPlanta())
+				p.actuar();
+	}
+
+	public void moverProyectiles() {
+		for(int i = 0; i<matriz.length; i++)
+			for(Proyectil p : matriz[i].getFilaProyectil())
+				p.mover();		
 	}	
 	
 }

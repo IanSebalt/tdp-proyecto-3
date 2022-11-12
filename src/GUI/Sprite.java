@@ -3,6 +3,7 @@ package GUI;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
+@SuppressWarnings("serial")
 public class Sprite extends JLabel{
 	private ImageIcon img;
 	

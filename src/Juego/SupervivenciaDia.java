@@ -7,19 +7,24 @@ import Escenario.Coordenada;
 import Fabricas.FabricaPlantaDia;
 import Fabricas.FabricaZombieDia;
 
-public class SupervivenciaDia extends ModoDeJuego{	
+public class SupervivenciaDia extends ModoDeJuego{
+	
+	protected int cronometro;
 	
 	public SupervivenciaDia(Juego j) {
 		super.fabricaPlan = new FabricaPlantaDia();
 		super.fabricaZom = new FabricaZombieDia();
+		this.cronometro = 0;
 	}
 	
-	@Override
-	public void accionModo() {
-		// TODO generar soles dia		
+	public void accionModo(int seg) {
+		if (cronometro == 10000) {
+			//TODO generar soles, juego llamando a ventana
+			cronometro = 0;
+		}
+		cronometro += seg;
 	}
 
-	@Override
 	public Planta generarPlanta(int c, Coordenada coord) {		
 		Planta nuevaPlanta = null;
 		if(c == 1) {
@@ -48,7 +53,6 @@ public class SupervivenciaDia extends ModoDeJuego{
 	}
 	
 	public String getFondo() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

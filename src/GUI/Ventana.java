@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 
 import Entidades.Entidad;
 import Entidades.Planta;
-import Entidades.Zombie;
 import Juego.*;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;

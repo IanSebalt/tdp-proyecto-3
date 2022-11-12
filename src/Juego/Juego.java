@@ -12,13 +12,19 @@ import Hilos.ControlZombie;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import Entidades.*;
-
 public class Juego {
 	
 	private ModoDeJuego miModo;
 	
 	protected int puntosSoles;
+	
+	protected int zombiesBasicos, zombiesRobustos, zombiesEspeciales;
+	
+	protected int oleadaActual;
+	
+	protected int oleadasTotal;
+	
+	protected int nivelActual;
 	
 	protected static Juego instance;
 	
@@ -27,6 +33,8 @@ public class Juego {
 	protected Control miControl;
 	
 	protected Grilla miGrilla;
+	
+	protected ManejoNivel miManejo;
 	
 	
 	/**
@@ -37,8 +45,13 @@ public class Juego {
 	private Juego(Ventana v) {
 		this.miVentana = v;
 		this.puntosSoles = 0;
+		this.zombiesBasicos = 0;
+		this.zombiesEspeciales = 0;
+		this.zombiesRobustos = 0;
+		this.miManejo = new ManejoNivel();
 		this.miControl = new Control(this);		
 		this.miModo = null;
+		miManejo.generarArchivoNivel();
 	}
 	
 	/**
@@ -84,6 +97,16 @@ public class Juego {
 		return miModo;
 	}
 	
+	public void generarNivel(int nivel,int oleada) {
+		nivelActual = nivel;
+		oleadaActual = oleada;
+		zombiesBasicos = miManejo.getInformacion("Nivel"+ nivel + "_Oleada" + "ZombieBasico");
+		zombiesEspeciales = miManejo.getInformacion("Nivel"+ nivel + "_Oleada" + oleada + "ZombieEspecial");
+		zombiesRobustos = miManejo.getInformacion("Nivel"+ nivel + "_Oleada" + oleada + "ZombieRobusto");
+		puntosSoles = miManejo.getInformacion("Nivel"+ nivel + "Soles");
+		oleadasTotal = miManejo.getInformacion("OleadasNivel" + nivel);
+	}
+	
 	public Planta generarPlanta(int i, int x, int y) {
 		Planta retornar = null;
 		Coordenada c = new Coordenada(x,y);
@@ -124,8 +147,16 @@ public class Juego {
 		miGrilla.matarProyectil(p);
 	}
 	
+	public void moverProyectiles() {
+		miGrilla.moverProyectiles();
+	}
+	
+	public void actuarPlantas() {
+		miGrilla.actuarPlantas();
+	}
+	
 	public void empezarJuego() {
-		miGrilla = new Grilla(6, 9);
+		miGrilla = new Grilla(6);
 		ControlZombie cz = new ControlZombie(this);
 		Thread t1 = new Thread(cz);
 		t1.start();

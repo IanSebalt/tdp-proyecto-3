@@ -14,7 +14,7 @@ public abstract class ModoDeJuego {
 	
 	protected FabricaPlanta fabricaPlan;	
 	
-	public abstract void accionModo();
+	public abstract void accionModo(int seg);
 		
 	public abstract Planta generarPlanta(int i, Coordenada c);
 
