@@ -72,6 +72,28 @@ public class Ventana {
 		panelMain.add(panelMenu);
 		panelMenu.setLayout(null);
 		
+		abrirMenu();
+	}
+	
+	public void crearEntidad(Entidad e) {
+		panelGhost.add(e.getSprite());
+		panelGhost.revalidate();
+		panelGhost.repaint();
+		e.getSprite().mover(1000, e.getCoordenada().getY() * 100);
+	}
+	
+	public void eliminarPlanta(Planta p) {		
+		JLabel cont = (JLabel) panelTablero.getComponentAt(p.getCoordenada().getX() * 100, p.getCoordenada().getY() * 100);
+		cont.remove(p.getSprite());
+		cont.repaint();
+	}
+	
+	public void eliminarEntidad(Entidad e) {
+		panelGhost.remove(e.getSprite());
+		panelGhost.repaint();
+	}
+	
+	private void abrirMenu() {
 		JButton btnJugar = new JButton("Jugar");
 		btnJugar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -95,17 +117,9 @@ public class Ventana {
 		panelMenu.add(btnManual);
 	}
 	
-	public void crearEntidad(Entidad e) {
-		panelGhost.add(e.getSprite());
-		panelGhost.revalidate();
-		panelGhost.repaint();
-		e.getSprite().mover(1000, e.getCoordenada().getY() * 100);
-	}
-	
-	public void eliminarPlanta(Planta p) {		
-		JLabel cont = (JLabel) panelTablero.getComponentAt(p.getCoordenada().getX() * 100, p.getCoordenada().getY() * 100);
-		cont.remove(p.getSprite());
-		cont.repaint();
+	public void terminarPartida() {
+		panelMain.removeAll();
+		abrirMenu();
 	}
 	
 	private void funcionJugar() {
