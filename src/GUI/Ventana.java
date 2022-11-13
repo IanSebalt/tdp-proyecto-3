@@ -102,7 +102,7 @@ public class Ventana {
 		e.getSprite().mover(1000, e.getCoordenada().getY() * 100);
 	}
 	
-	public void eliminarEntidad(Planta p) {		
+	public void eliminarPlanta(Planta p) {		
 		JLabel cont = (JLabel) panelTablero.getComponentAt(p.getCoordenada().getX() * 100, p.getCoordenada().getY() * 100);
 		cont.remove(p.getSprite());
 		cont.repaint();

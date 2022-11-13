@@ -138,13 +138,27 @@ public class Juego {
 	
 	public void matarPlanta(Planta p) {
 		miGrilla.matarPlanta(p.getCoordenada());
-		miVentana.eliminarEntidad(p);
+		miVentana.eliminarPlanta(p);
 	}
 	public void matarZombie(Zombie z) {
 		miGrilla.matarZombie(z);
+		//miVentana.eliminarEntidad(z);
 	}
 	public void matarProyectil(Proyectil p) {
 		miGrilla.matarProyectil(p);
+		//miVentana.eliminarEntidad(p);
+	}
+	
+	public void accionModo(int seg) {
+		miModo.accionModo(seg);
+	}
+	
+	public void generarLapida(Coordenada cor) {
+		miVentana.generarLapida(cord);
+	}
+	
+	public void generarSol(Coordenada cor) {
+		miVentana.generarSol(cor);
 	}
 	
 	public void moverProyectiles() {

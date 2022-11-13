@@ -16,8 +16,8 @@ public class Control implements Runnable{
 	public void run() {
 		while(continuar){
 			try {
-				//TODO métodos a controlar por el hilo
-				Thread.sleep(200);
+				Thread.sleep(1000);
+				miJuego.accionModo(1000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

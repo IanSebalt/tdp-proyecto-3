@@ -1,6 +1,8 @@
 package Juego;
 
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import Entidades.Planta;
 import Entidades.Zombie;
 import Escenario.Coordenada;
@@ -19,7 +21,9 @@ public class SupervivenciaDia extends ModoDeJuego{
 	
 	public void accionModo(int seg) {
 		if (cronometro == 10000) {
-			//TODO generar soles, juego llamando a ventana
+			int randomY = ThreadLocalRandom.current().nextInt(0, 8);
+			int randomX = ThreadLocalRandom.current().nextInt(0, 5);			
+			miJuego.generarSol(new Coordenada(randomX, randomY));
 			cronometro = 0;
 		}
 		cronometro += seg;

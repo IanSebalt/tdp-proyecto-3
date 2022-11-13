@@ -1,5 +1,7 @@
 package Juego;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 import Entidades.Planta;
 import Entidades.Zombie;
 import Escenario.Coordenada;
@@ -17,8 +19,10 @@ public class SupervivenciaNoche extends ModoDeJuego{
 	}
 
 	public void accionModo(int seg) {
-		if (cronometro == 10000) {
-			//TODO generar lápidas
+		if (cronometro == 1000) {
+			int randomY = ThreadLocalRandom.current().nextInt(0, 8);
+			int randomX = ThreadLocalRandom.current().nextInt(0, 5);
+			miJuego.generarLapida(new Coordenada(randomX, randomY));
 			cronometro = 0;
 		}
 		cronometro += seg;
