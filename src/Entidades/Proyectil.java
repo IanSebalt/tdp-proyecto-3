@@ -17,7 +17,7 @@ public class Proyectil extends Entidad{
 	}
 	
 	public void mover() {
-		miSprite.mover(miSprite.getX() - 1, miSprite.getY());
+		miSprite.mover(miSprite.getX() + 2, miSprite.getY());
 		miRectangulo.setLocation(miSprite.getX() - 1, miSprite.getY());
 	}
 	

@@ -6,6 +6,8 @@ import Entidades.Planta;
 import Entidades.Proyectil;
 import Entidades.Zombie;
 import Escenario.Grilla;
+import Fabricas.FabricaPlanta;
+import Fabricas.FabricaZombie;
 import GUI.Ventana;
 import Hilos.Control;
 import Hilos.ControlZombie;
@@ -89,8 +91,12 @@ public class Juego {
 	 * decida.
 	 * @param m - nuevo estado de modo de juego.
 	 */
-	public void setModo(ModoDeJuego m) {
-		this.miModo = m;
+	public void setModo(int m) {
+		if (m==1)
+			this.miModo = new SupervivenciaDia(this);
+		else
+			if(m==2)
+				this.miModo = new SupervivenciaNoche(this);
 	}
 	
 	public ModoDeJuego getModo() {
@@ -100,31 +106,65 @@ public class Juego {
 	public void generarNivel(int nivel,int oleada) {
 		nivelActual = nivel;
 		oleadaActual = oleada;
-		zombiesBasicos = miManejo.getInformacion("Nivel"+ nivel + "_Oleada" + "ZombieBasico");
+		zombiesBasicos = miManejo.getInformacion("Nivel"+ nivel + "_Oleada" + oleada + "ZombieBasico");
 		zombiesEspeciales = miManejo.getInformacion("Nivel"+ nivel + "_Oleada" + oleada + "ZombieEspecial");
 		zombiesRobustos = miManejo.getInformacion("Nivel"+ nivel + "_Oleada" + oleada + "ZombieRobusto");
 		puntosSoles = miManejo.getInformacion("Nivel"+ nivel + "Soles");
 		oleadasTotal = miManejo.getInformacion("OleadasNivel" + nivel);
 	}
 	
-	public Planta generarPlanta(int i, int x, int y) {
+	public Planta generarPlanta(int c, int x, int y) {
 		Planta retornar = null;
-		Coordenada c = new Coordenada(x,y);
-		if(miGrilla.getPlanta(c) == null) {
-			retornar = miModo.generarPlanta(i, c);
+		FabricaPlanta fabricaPlan = miModo.getFabricaPlanta();
+		Coordenada coord = new Coordenada(x,y);
+		if(miGrilla.getPlanta(coord) == null) {
+			if(c == 1) 
+				retornar = fabricaPlan.getPlantaGeneradora(coord);			
+			else
+				if(c == 2)
+					retornar = fabricaPlan.getPlantaRobusta(coord);
+				else
+					if(c == 3)
+						retornar = fabricaPlan.getPlantaDisparadora(coord);
 			retornar.getRectangulo().setLocation(x*100, y*100);
-			miGrilla.setPlanta(retornar, c);
+			miGrilla.setPlanta(retornar, coord);
 		}
 		return retornar;
 	}
 	
-	public void generarZombie() {
+	public void generarZombie(int c) {
 		int randomY = ThreadLocalRandom.current().nextInt(1, 5);
-		Zombie z = miModo.generarZombie('a');
-		miGrilla.setZombie(z, randomY);
-		z.setCoordenada(0, randomY);
-		z.getRectangulo().setLocation(1000, randomY * 100);
-		miVentana.crearEntidad(z);
+		FabricaZombie fabricaZom = miModo.getFabricaZombie();		
+		Zombie nuevoZombie = null;
+		if(c == 1)
+			nuevoZombie = fabricaZom.getZombieBasico();
+		else
+			if(c == 2)
+				nuevoZombie = fabricaZom.getZombieEspecial();
+			else
+				if(c == 3)
+					nuevoZombie = fabricaZom.getZombieRobusto();
+		nuevoZombie.setCoordenada(0, randomY);
+		nuevoZombie.getRectangulo().setLocation(1000, randomY * 100);
+		miGrilla.setZombie(nuevoZombie, randomY);
+		miVentana.crearEntidad(nuevoZombie);
+	}
+	
+	public void generarOleada() {
+		while(zombiesRobustos>0 || zombiesEspeciales>0 || zombiesBasicos>0) {
+			if(zombiesRobustos>0) {
+				generarZombie(3);
+				zombiesRobustos--;
+			}
+			if(zombiesBasicos>0) {
+				generarZombie(1);
+				zombiesBasicos--;
+			}
+			if(zombiesEspeciales>0) {
+				generarZombie(2);
+				zombiesEspeciales--;
+			}
+		}
 	}
 	
 	public void generarProyectil(Coordenada c, Proyectil p) {
@@ -154,11 +194,11 @@ public class Juego {
 	}
 	
 	public void generarLapida(Coordenada cor) {
-		miVentana.generarLapida(cord);
+		//miVentana.generarLapida(cor);
 	}
 	
 	public void generarSol(Coordenada cor) {
-		miVentana.generarSol(cor);
+		//miVentana.generarSol(cor);
 	}
 	
 	public void moverProyectiles() {
@@ -170,6 +210,9 @@ public class Juego {
 	}
 	
 	public void empezarJuego() {
+		nivelActual = 1;
+		oleadaActual = 1;
+		generarNivel(nivelActual, oleadaActual);
 		miGrilla = new Grilla(6);
 		ControlZombie cz = new ControlZombie(this);
 		Thread t1 = new Thread(cz);

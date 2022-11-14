@@ -18,7 +18,7 @@ public class ControlZombie extends Control{
 				miJuego.moverZombies();
 				spawn += 50;
 				if(spawn==5000) {
-					miJuego.generarZombie();
+					miJuego.generarOleada();
 					spawn = 0;
 				}
 			} catch (InterruptedException e) {

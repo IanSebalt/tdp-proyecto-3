@@ -127,7 +127,7 @@ public class Ventana {
 		Juego j = Juego.obtenerInstancia(this);
 		int opt = JOptionPane.showOptionDialog(panelMain, "Seleccione el modo de juego", "Modo de juego", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones[0]);
 		if(opt == 0) {
-			j.setModo(new SupervivenciaDia(j));
+			j.setModo(1);
 			panelMain.remove(panelMenu);
 			panelJuego = new JPanel();
 			panelJuego.setBounds(0, 0, 1264, 985);

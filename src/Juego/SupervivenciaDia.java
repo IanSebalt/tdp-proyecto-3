@@ -3,10 +3,10 @@ package Juego;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import Entidades.Planta;
-import Entidades.Zombie;
 import Escenario.Coordenada;
+import Fabricas.FabricaPlanta;
 import Fabricas.FabricaPlantaDia;
+import Fabricas.FabricaZombie;
 import Fabricas.FabricaZombieDia;
 
 public class SupervivenciaDia extends ModoDeJuego{
@@ -29,32 +29,6 @@ public class SupervivenciaDia extends ModoDeJuego{
 		cronometro += seg;
 	}
 
-	public Planta generarPlanta(int c, Coordenada coord) {		
-		Planta nuevaPlanta = null;
-		if(c == 1) {
-			nuevaPlanta = fabricaPlan.getPlantaGeneradora(coord);
-		}
-			
-		else
-			if(c == 2)
-				nuevaPlanta = fabricaPlan.getPlantaRobusta(coord);
-			else
-				if(c == 3)
-					nuevaPlanta = fabricaPlan.getPlantaDisparadora(coord);
-		return nuevaPlanta;
-	}
-	public Zombie generarZombie(char c) {
-		Zombie nuevoZombie = null;
-		if(c == 'a')
-			nuevoZombie = fabricaZom.getZombieBasico();
-		else
-			if(c == 'b')
-				nuevoZombie = fabricaZom.getZombieEspecial();
-			else
-				if(c == 'c')
-					nuevoZombie = fabricaZom.getZombieRobusto();
-		return nuevoZombie;
-	}
 	
 	public String getFondo() {
 		return null;
@@ -68,5 +42,13 @@ public class SupervivenciaDia extends ModoDeJuego{
 	public String[] getPlantas() {
 		String[] retornar = {"/imagenes/sunflower.gif", "/imagenes/wallnut.gif", "/imagenes/lanzaguisantes.gif"};
 		return retornar;
+	}
+	
+	public FabricaPlanta getFabricaPlanta() {
+		return fabricaPlan;
+	}
+	
+	public FabricaZombie getFabricaZombie() {
+		return fabricaZom;
 	}
 }

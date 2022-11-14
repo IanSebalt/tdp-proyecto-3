@@ -2,10 +2,10 @@ package Juego;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-import Entidades.Planta;
-import Entidades.Zombie;
 import Escenario.Coordenada;
+import Fabricas.FabricaPlanta;
 import Fabricas.FabricaPlantaNoche;
+import Fabricas.FabricaZombie;
 import Fabricas.FabricaZombieNoche;
 
 public class SupervivenciaNoche extends ModoDeJuego{
@@ -22,40 +22,12 @@ public class SupervivenciaNoche extends ModoDeJuego{
 		if (cronometro == 1000) {
 			int randomY = ThreadLocalRandom.current().nextInt(0, 8);
 			int randomX = ThreadLocalRandom.current().nextInt(0, 5);
-			miJuego.generarLapida(new Coordenada(randomX, randomY));
-			cronometro = 0;
+			miJuego.generarLapida(new Coordenada(randomX, randomY));			
 		}
 		cronometro += seg;
 	}
 
-	@Override
-	public Planta generarPlanta(int c, Coordenada coord) {
-		Planta nuevaPlanta = null;
-		if(c == 1)
-			nuevaPlanta = fabricaPlan.getPlantaGeneradora(coord);
-		else
-			if(c == 2)
-				nuevaPlanta = fabricaPlan.getPlantaRobusta(coord);
-			else
-				if(c == 3)
-					nuevaPlanta = fabricaPlan.getPlantaDisparadora(coord);
-		return nuevaPlanta;		
-	}
-
-	@Override
-	public Zombie generarZombie(char c) {
-		Zombie nuevoZombie = null;
-		if(c == 'a')
-			nuevoZombie = fabricaZom.getZombieBasico();
-		else
-			if(c == 'b')
-				nuevoZombie = fabricaZom.getZombieEspecial();
-			else
-				if(c == 'c')
-					nuevoZombie = fabricaZom.getZombieRobusto();
-		return nuevoZombie;		
-	}
-
+	
 	@Override
 	public String getFondo() {
 		// TODO Auto-generated method stub
@@ -70,5 +42,13 @@ public class SupervivenciaNoche extends ModoDeJuego{
 
 	public String[] getPlantas() {
 		return null;
+	}
+
+	public FabricaPlanta getFabricaPlanta() {
+		return fabricaPlan;
+	}
+
+	public FabricaZombie getFabricaZombie() {
+		return fabricaZom;
 	}
 }
