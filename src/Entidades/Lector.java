@@ -1,5 +1,10 @@
 package Entidades;
 
+import java.awt.Rectangle;
+
+import javax.swing.ImageIcon;
+
+import GUI.Sprite;
 
 public class Lector extends ZombieEspecial{
 		protected boolean diario;
@@ -9,6 +14,9 @@ public class Lector extends ZombieEspecial{
 			velocidad = 5;//falta ver velocidad
 			dmg = 2; //Ver dmg de zombie;
 			diario = true;
+			ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/zombie_lector.gif"));
+			miSprite = new Sprite(img);
+			miRectangulo = new Rectangle(0,0, anchoRectanguloZombie, altoRectanguloZombie);
 			
 		}
 		
@@ -20,11 +28,7 @@ public class Lector extends ZombieEspecial{
 			} else if(vida <= 80 && diario) {
 				romperDiario();
 			}
-		}
-		
-		public void morir() {
-			//Falta ver como muere		
-		}		
+		}	
 		
 		private void romperDiario() {
 			diario = false;

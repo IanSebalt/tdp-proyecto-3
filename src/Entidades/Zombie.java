@@ -5,6 +5,8 @@ import Juego.Juego;
 public abstract class Zombie extends Entidad implements VisitorZombie{
 	protected int dmg;
 	protected int velocidad;
+	protected int anchoRectanguloZombie = 100;
+	protected int altoRectanguloZombie = 100;
 	
 	public void mover() {
 		miSprite.mover(miSprite.getX() - velocidad, miSprite.getY());

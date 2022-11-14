@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 
 import Escenario.Coordenada;
 import GUI.Sprite;
+import Juego.Juego;
 
 public class Girasol extends PlantaGeneradora{
 	public Girasol(Coordenada c) {
@@ -20,9 +21,8 @@ public class Girasol extends PlantaGeneradora{
 	}
 	
 	public void actuar() {
-		//Generaria soles
+		Juego j = Juego.obtenerInstancia(null);
+		j.generarSol( coord );
 	}
 
-	public void morir() {
-	}
 }

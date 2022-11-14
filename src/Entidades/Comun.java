@@ -3,7 +3,6 @@ package Entidades;
 import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
-
 import GUI.Sprite;
 
 public class Comun extends ZombieBasico{
@@ -13,11 +12,7 @@ public class Comun extends ZombieBasico{
 		dmg = 10;
 		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/zombie.gif"));
 		miSprite = new Sprite(img);
-		miRectangulo = new Rectangle(0,0,100,100);//HardCode
+		miRectangulo = new Rectangle(0,0, anchoRectanguloZombie, altoRectanguloZombie);
 	}
 	
-	
-	public void morir() {
-		//Falta ver como muere		
-	}
 }

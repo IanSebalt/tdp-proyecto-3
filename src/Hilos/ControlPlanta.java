@@ -11,7 +11,7 @@ public class ControlPlanta extends Control{
 	public void run() {
 		while(continuar){
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(2000);
 				miJuego.actuarPlantas();
 			} catch (InterruptedException e) {
 				e.printStackTrace();

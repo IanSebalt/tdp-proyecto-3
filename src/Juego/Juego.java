@@ -10,6 +10,8 @@ import Fabricas.FabricaPlanta;
 import Fabricas.FabricaZombie;
 import GUI.Ventana;
 import Hilos.Control;
+import Hilos.ControlPlanta;
+import Hilos.ControlProyectil;
 import Hilos.ControlZombie;
 
 import java.util.concurrent.ThreadLocalRandom;
@@ -85,6 +87,30 @@ public class Juego {
 		this.puntosSoles -= s;
 	}
 	
+	public int cantidadZombiesParaGenerarEnOleada() {
+		return zombiesBasicos + zombiesEspeciales + zombiesRobustos;
+	}
+	
+	
+	public boolean hayZombiesEnGrilla() {
+		return miGrilla.hayZombies();
+	}
+	
+	
+	
+	public void seAcercaOleada() {
+		//miVenta.seAcercaOleada();
+	}
+	
+	public void finNivel() {
+		/* Idea
+		 * Avisarle a la ventana que se termino el nivel para que muestre un carte de salir o seguir de nivel
+		 * Si presiona seguir de nivel se llama -> generarSiguienteNivel()
+		 */
+	}
+
+	
+	
 	/**
 	 * Uso de Patrón State
 	 * Método que modifica el estado del modo de juego dependiendo de lo que el jugador
@@ -113,6 +139,29 @@ public class Juego {
 		oleadasTotal = miManejo.getInformacion("OleadasNivel" + nivel);
 	}
 	
+	public void manejoOleada() {
+		if(oleadaActual < oleadasTotal) {
+			oleadaActual++;
+			generarNivel(nivelActual, oleadaActual);
+		}else{ //Es la ultima oleada
+			if( hayZombiesEnGrilla() == false ) {
+				if( nivelActual < 2 ) {
+					//miVentana.finNivel();
+					siguienteNivel(); //Este metodo lo llamaria miVentana si clickean en seguiente nivel;
+				}else { //Es el ultimo nivel
+					//miVentana.finJuego();
+				}
+				
+			}
+		}
+	}
+	
+	public void siguienteNivel() {
+		nivelActual++;
+		oleadaActual = 1;
+		generarNivel(nivelActual, oleadaActual);
+	}
+	
 	public Planta generarPlanta(int c, int x, int y) {
 		Planta retornar = null;
 		FabricaPlanta fabricaPlan = miModo.getFabricaPlanta();
@@ -133,7 +182,7 @@ public class Juego {
 	}
 	
 	public void generarZombie(int c) {
-		int randomY = ThreadLocalRandom.current().nextInt(1, 5);
+		int randomY = ThreadLocalRandom.current().nextInt(0, 6);
 		FabricaZombie fabricaZom = miModo.getFabricaZombie();		
 		Zombie nuevoZombie = null;
 		if(c == 1)
@@ -170,6 +219,7 @@ public class Juego {
 	public void generarProyectil(Coordenada c, Proyectil p) {
 		miGrilla.setProyectil(p, c);
 		miVentana.crearEntidad(p);
+		p.getSprite().mover(c.getX()*100+50, c.getY() * 100);
 	}
 	
 	public void moverZombies() {
@@ -182,11 +232,11 @@ public class Juego {
 	}
 	public void matarZombie(Zombie z) {
 		miGrilla.matarZombie(z);
-		//miVentana.eliminarEntidad(z);
+		miVentana.eliminarEntidad(z);
 	}
 	public void matarProyectil(Proyectil p) {
 		miGrilla.matarProyectil(p);
-		//miVentana.eliminarEntidad(p);
+		miVentana.eliminarEntidad(p);
 	}
 	
 	public void accionModo(int seg) {
@@ -215,7 +265,13 @@ public class Juego {
 		generarNivel(nivelActual, oleadaActual);
 		miGrilla = new Grilla(6);
 		ControlZombie cz = new ControlZombie(this);
-		Thread t1 = new Thread(cz);
-		t1.start();
+		Thread hiloZombie = new Thread(cz);
+		hiloZombie.start();
+		ControlPlanta cPlanta = new ControlPlanta(this);
+		Thread hiloPlanta = new Thread(cPlanta);
+		hiloPlanta.start();
+		ControlProyectil cProyectil = new ControlProyectil(this);
+		Thread hiloProyectil = new Thread(cProyectil);
+		hiloProyectil.start();
 	}
 }

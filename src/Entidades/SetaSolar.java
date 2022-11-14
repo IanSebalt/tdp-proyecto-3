@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 
 import Escenario.Coordenada;
 import GUI.Sprite;
+import Juego.Juego;
 
 public class SetaSolar extends PlantaGeneradora{
 	public SetaSolar(Coordenada c) {
@@ -14,13 +15,14 @@ public class SetaSolar extends PlantaGeneradora{
 		vida = 100;
 		costo = 25;
 		coord = c;
+		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/seta_solar.gif"));
+		miSprite = new Sprite(img);
+		miRectangulo = new Rectangle(0,0,100,100);
 	}
 	
 	public void actuar() {
-		//Generaria soles
+		Juego j = Juego.obtenerInstancia(null);
+		j.generarSol( coord );
 	}
 
-	public void morir() {
-		//Falta ver como muere
-	}
 }

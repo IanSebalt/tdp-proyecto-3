@@ -186,7 +186,7 @@ public class Ventana {
 	
 	private void generarTienda() {
 		int xIni = 0;
-		int yIni = 700;
+		int yIni = 600;
 		for(int i = 0; i < 3; i++) {
 			JLabel tienda = new JLabel();
 			tienda.setBounds(xIni + (i * 100), yIni, 100, 100);

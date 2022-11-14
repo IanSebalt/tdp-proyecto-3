@@ -11,7 +11,7 @@ import Juego.Juego;
 public class LanzaGuisantes extends PlantaDisparadora{
 	public LanzaGuisantes(Coordenada c) {
 		segundos = 1;
-		dmg = 10;
+		dmg = 40;
 		vida = 100;
 		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/lanzaguisantes.gif"));
 		miSprite = new Sprite(img);
@@ -21,14 +21,8 @@ public class LanzaGuisantes extends PlantaDisparadora{
 	}
 	
 	public void actuar() {
-		Proyectil p = new Proyectil(dmg, coord);
+		Proyectil p = new Proyectil(dmg, coord, miRectangulo);
 		Juego j = Juego.obtenerInstancia(null);
 		j.generarProyectil(coord, p);
 	}
-
-	public void morir() {
-		Juego j = Juego.obtenerInstancia(null);
-		j.matarPlanta(this);
-	}
-	
 }

@@ -1,11 +1,10 @@
 package Escenario;
 
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 import Entidades.*;
-
-import Entidades.Planta;
-import Entidades.Zombie;
 
 public class Grilla {
 	
@@ -56,7 +55,7 @@ public class Grilla {
 		matriz[p.getCoordenada().getY()].getFilaProyectil().removeFirstOccurrence(p);
 	}
 	
-	public Planta getUltimaPlanta(int fila) {
+	public synchronized Planta getUltimaPlanta(int fila) {
 		Planta toReturn = null; 
 		Planta [] filaPlantas = matriz[fila].getFilaPlanta();
 		boolean encontre = false;
@@ -71,16 +70,18 @@ public class Grilla {
 		return toReturn;
 	}
 	
-	public void moverZombies() {
+	public synchronized void moverZombies() {
 		for(int i = 0; i<matriz.length; i++) {
-			Iterator<Zombie> it = matriz[i].getFilaZombie().iterator();
+			List<Zombie> listaSincronizada = Collections.synchronizedList(matriz[i].getFilaZombie());
+			Iterator<Zombie> it = listaSincronizada.iterator();
+			//Iterator<Zombie> it = matriz[i].getFilaZombie().iterator();
 			while(it.hasNext()) {
 				Planta ultimaPlanta = getUltimaPlanta(i);
 				Proyectil ultimoProyectil = null;
+				Zombie zom = it.next();
 				if(!matriz[i].getFilaProyectil().isEmpty()) {
 					ultimoProyectil = matriz[i].getFilaProyectil().getLast();
-				}
-				Zombie zom = it.next();
+				}				
 				if( ultimaPlanta == null ) {
 					if(ultimoProyectil != null) {
 						if(zom.getRectangulo().intersects(ultimoProyectil.getRectangulo())){
@@ -109,16 +110,32 @@ public class Grilla {
 		}
 	}
 
-	public void actuarPlantas() {
+	public synchronized void actuarPlantas() {
 		for(int i = 0; i<matriz.length; i++)
 			for(Planta p : matriz[i].getFilaPlanta())
-				p.actuar();
+				if(p != null) {
+					p.actuar();
+				}
 	}
 
-	public void moverProyectiles() {
+	public synchronized void moverProyectiles() {
 		for(int i = 0; i<matriz.length; i++)
 			for(Proyectil p : matriz[i].getFilaProyectil())
-				p.mover();		
+				if(p != null) {
+					p.mover();		
+				}
 	}	
+	
+	public synchronized boolean hayZombies() {
+		boolean toReturn = false;
+		for(int i = 0; i<matriz.length; i++) {
+			for(Zombie z : matriz[i].getFilaZombie()) {
+				if(z != null) {
+					toReturn = true;
+				}
+			}
+		}
+		return toReturn;
+	}
 	
 }

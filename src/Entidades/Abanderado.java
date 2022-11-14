@@ -1,13 +1,19 @@
 package Entidades;
 
+import java.awt.Rectangle;
+
+import javax.swing.ImageIcon;
+
+import GUI.Sprite;
+
 public class Abanderado extends ZombieBasico{
 	public Abanderado() {
-		velocidad = 5;//falta ver velocidad
-		dmg = 2; //Ver dmg de zombie;
-		
+		vida = 120;
+		velocidad = 2;
+		dmg = 10;
+		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/abanderado.gif"));
+		miSprite = new Sprite(img);
+		miRectangulo = new Rectangle(0,0, anchoRectanguloZombie, altoRectanguloZombie);
 	}	
 
-	public void morir() {
-		//Falta ver como muere		
-	}
 }
