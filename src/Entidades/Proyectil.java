@@ -20,7 +20,7 @@ public class Proyectil extends Entidad{
 		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/projectile.png"));
 		miSprite = new Sprite(img);
 		miRectangulo = new Rectangle(0,0, anchoRectangulo, (int)rec.getHeight());
-		miRectangulo.setLocation(c.getX()*100, c.getY()*100);
+		miRectangulo.setLocation(c.getX()*100+50, c.getY()*100);
 	}
 	
 	public void morir() {

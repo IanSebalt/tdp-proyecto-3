@@ -26,7 +26,7 @@ public class Grilla {
 	}
 	
 	public void setProyectil(Proyectil p, Coordenada c) {
-		matriz[c.getY()].getFilaProyectil().addLast(p);
+		matriz[c.getY()].getFilaProyectil().addFirst(p);
 	}
 	
 	public Planta getPlanta(Coordenada cord) {
