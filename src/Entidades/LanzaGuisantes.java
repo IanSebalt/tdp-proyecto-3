@@ -20,7 +20,7 @@ public class LanzaGuisantes extends PlantaDisparadora{
 		miRectangulo = new Rectangle(0,0,100,100);
 	}
 	
-	public void actuar() {
+	public synchronized void actuar() {
 		Juego j = Juego.obtenerInstancia(null);
 		if(j.hayZombieFila(coord.getX())) {
 			Proyectil p = new Proyectil(dmg, coord, miRectangulo);		

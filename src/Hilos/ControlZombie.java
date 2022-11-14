@@ -18,7 +18,7 @@ public class ControlZombie extends Control{
 				miJuego.moverZombies();
 				if( miJuego.cantidadZombiesParaGenerarEnOleada() > 0 ) {
 					spawn += 50;
-					if(spawn==5000) {
+					if(spawn==5000 && miJuego.hayZombiesEnGrilla()==false) {
 						miJuego.generarOleada();
 						spawn = 0;
 					}
