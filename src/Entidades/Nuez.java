@@ -6,7 +6,6 @@ import javax.swing.ImageIcon;
 
 import Escenario.Coordenada;
 import GUI.Sprite;
-import Juego.Juego;
 
 public class Nuez extends PlantaRobusta {
 	public Nuez(Coordenada c) {

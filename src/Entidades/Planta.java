@@ -1,9 +1,5 @@
 package Entidades;
 
-import java.awt.Rectangle;
-
-import Escenario.Coordenada;
-import GUI.Sprite;
 import Juego.Juego;
 
 public abstract class Planta extends Entidad{

@@ -10,7 +10,7 @@ import Juego.Juego;
 
 public class Proyectil extends Entidad{
 	protected int dmg;
-	protected int velocidad = 2;
+	protected int velocidad = 15;
 	protected int anchoRectangulo = 100;
 	
 	public Proyectil(int d, Coordenada c, Rectangle rec) {

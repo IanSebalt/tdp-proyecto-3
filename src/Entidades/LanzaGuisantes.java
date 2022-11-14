@@ -21,8 +21,10 @@ public class LanzaGuisantes extends PlantaDisparadora{
 	}
 	
 	public void actuar() {
-		Proyectil p = new Proyectil(dmg, coord, miRectangulo);
 		Juego j = Juego.obtenerInstancia(null);
-		j.generarProyectil(coord, p);
+		if(j.hayZombieFila(coord.getX())) {
+			Proyectil p = new Proyectil(dmg, coord, miRectangulo);		
+			j.generarProyectil(coord, p);
+		}
 	}
 }

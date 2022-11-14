@@ -125,7 +125,7 @@ public class Juego {
 	}
 	
 	public void manejoOleada() {
-		if(oleadaActual < oleadasTotal) {
+		if(oleadaActual < oleadasTotal ) {
 			oleadaActual++;
 			generarNivel(nivelActual, oleadaActual);
 		}else{ //Es la ultima oleada
@@ -242,6 +242,10 @@ public class Juego {
 	
 	public void actuarPlantas() {
 		miGrilla.actuarPlantas();
+	}
+	
+	public boolean hayZombieFila(int fila) {
+		return miGrilla.hayZombiesFila(fila);
 	}
 	
 	public void empezarJuego() {

@@ -2,6 +2,7 @@ package Escenario;
 
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 import Entidades.*;
@@ -16,11 +17,11 @@ public class Grilla {
 			this.matriz[i] = new Fila();
 	}
 	
-	public void setZombie(Zombie z, int fil) {		
+	public synchronized void setZombie(Zombie z, int fil) {		
 		matriz[fil].getFilaZombie().addLast(z);				
 	}
 	
-	public void setPlanta(Planta plan, Coordenada cord) {
+	public synchronized void setPlanta(Planta plan, Coordenada cord) {
 		if(matriz[cord.getY()].getFilaPlanta()[cord.getX()]==null)
 			matriz[cord.getY()].getFilaPlanta()[cord.getX()] = plan;			
 	}
@@ -37,11 +38,11 @@ public class Grilla {
 		return toReturn;
 	}	
 	
-	public void matarZombie(Zombie z) {
+	public synchronized void matarZombie(Zombie z) {
 		matriz[z.getCoordenada().getY()].getFilaZombie().removeFirstOccurrence(z);	
 	}
 	
-	public void matarPlanta(Coordenada cord) {		
+	public synchronized void matarPlanta(Coordenada cord) {		
 		Planta planta = null;
 		if(matriz[cord.getY()].getFilaPlanta()[cord.getX()]!=null) {
 			planta = matriz[cord.getY()].getFilaPlanta()[cord.getX()];
@@ -72,8 +73,9 @@ public class Grilla {
 	
 	public synchronized void moverZombies() {
 		for(int i = 0; i<matriz.length; i++) {
-			List<Zombie> listaSincronizada = Collections.synchronizedList(matriz[i].getFilaZombie());
-			Iterator<Zombie> it = listaSincronizada.iterator();
+			@SuppressWarnings("unchecked")
+			LinkedList<Zombie> filaZombie = (LinkedList<Zombie>) matriz[i].getFilaZombie().clone();
+			Iterator<Zombie> it = filaZombie.iterator();
 			//Iterator<Zombie> it = matriz[i].getFilaZombie().iterator();
 			while(it.hasNext()) {
 				Planta ultimaPlanta = getUltimaPlanta(i);
@@ -112,7 +114,7 @@ public class Grilla {
 
 	public synchronized void actuarPlantas() {
 		for(int i = 0; i<matriz.length; i++)
-			for(Planta p : matriz[i].getFilaPlanta())
+			for(Planta p : matriz[i].getFilaPlanta().clone())
 				if(p != null) {
 					p.actuar();
 				}
@@ -136,6 +138,10 @@ public class Grilla {
 			}
 		}
 		return toReturn;
+	}
+	
+	public synchronized boolean hayZombiesFila(int fila) {
+		return matriz[fila].getFilaZombie().size()>0;
 	}
 	
 }

@@ -22,7 +22,7 @@ public class ControlZombie extends Control{
 						miJuego.generarOleada();
 						spawn = 0;
 					}
-				}else {
+				}else {					
 					Thread.sleep(1000);
 					miJuego.manejoOleada();
 					
