@@ -96,21 +96,6 @@ public class Juego {
 		return miGrilla.hayZombies();
 	}
 	
-	
-	
-	public void seAcercaOleada() {
-		//miVenta.seAcercaOleada();
-	}
-	
-	public void finNivel() {
-		/* Idea
-		 * Avisarle a la ventana que se termino el nivel para que muestre un carte de salir o seguir de nivel
-		 * Si presiona seguir de nivel se llama -> generarSiguienteNivel()
-		 */
-	}
-
-	
-	
 	/**
 	 * Uso de Patrón State
 	 * Método que modifica el estado del modo de juego dependiendo de lo que el jugador
