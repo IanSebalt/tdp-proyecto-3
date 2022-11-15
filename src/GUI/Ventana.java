@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 
 import Entidades.Entidad;
 import Entidades.Planta;
+import Escenario.Coordenada;
 import Juego.*;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -26,6 +27,7 @@ public class Ventana {
 	private JPanel panelMenu;
 	private JPanel panelJuego;
 	private JPanel panelTablero;
+	private ManejoSonido miSonido;
 	private int plantaClick;
 
 	/**
@@ -57,7 +59,7 @@ public class Ventana {
 	private void initialize() {
 		frame = new JFrame();
 		frame.setResizable(false);
-		frame.setBounds(100, 100, 1280, 1024);
+		frame.setBounds(100, 100, 900, 750);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setFocusable(true);
@@ -93,6 +95,31 @@ public class Ventana {
 		panelGhost.repaint();
 	}
 	
+	public void generarSol(Coordenada c) {
+		JLabel sol = new JLabel();
+		sol.setBounds(c.getX(), c.getY(), 30, 30);
+		ImageIcon i = new ImageIcon(getClass().getResource("/imagenes/sol.png"));
+		sol.setIcon(i);
+		sol.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				Juego miJuego = Juego.obtenerInstancia(null);
+				miJuego.sumarSoles(25);
+				panelGhost.remove(sol);
+			}
+		});
+		panelGhost.add(sol);
+	}
+	
+	public void generarLapida(Coordenada c) {
+		JLabel cont = (JLabel) panelTablero.getComponentAt(c.getX(), c.getY());
+		JLabel lap = new JLabel();
+		lap.setBounds(0, 0, 100, 100);
+		ImageIcon i = new ImageIcon(getClass().getResource("/imagenes/grave.png"));
+		lap.setIcon(i);
+		cont.add(lap);
+		cont.repaint();
+	}
+	
 	private void abrirMenu() {
 		JButton btnJugar = new JButton("Jugar");
 		btnJugar.addActionListener(new ActionListener() {
@@ -100,7 +127,7 @@ public class Ventana {
 				funcionJugar();
 			}
 		});
-		btnJugar.setBounds(583, 265, 89, 23);
+		btnJugar.setBounds(375, 191, 89, 23);
 		panelMenu.add(btnJugar);
 		
 		JButton btnSalir = new JButton("Salir");
@@ -109,11 +136,11 @@ public class Ventana {
 				System.exit(0);
 			}
 		});
-		btnSalir.setBounds(583, 328, 89, 23);
+		btnSalir.setBounds(375, 303, 89, 23);
 		panelMenu.add(btnSalir);
 		
 		JButton btnManual = new JButton("Manual");
-		btnManual.setBounds(583, 299, 89, 23);
+		btnManual.setBounds(375, 247, 89, 23);
 		panelMenu.add(btnManual);
 	}
 	
@@ -128,6 +155,8 @@ public class Ventana {
 		int opt = JOptionPane.showOptionDialog(panelMain, "Seleccione el modo de juego", "Modo de juego", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones[0]);
 		if(opt == 0) {
 			j.setModo(1);
+			miSonido = new ManejoSonido();
+			miSonido.musicaDia();
 			panelMain.remove(panelMenu);
 			panelJuego = new JPanel();
 			panelJuego.setBounds(0, 0, 1264, 985);
