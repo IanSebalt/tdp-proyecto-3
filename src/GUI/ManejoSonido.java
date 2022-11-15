@@ -10,6 +10,8 @@ public class ManejoSonido {
 	
 	private Clip clip;
 	
+	protected boolean estaEncendida;
+	
 	public void musica(String musicPath) {
 		try {
 			File music = new File(musicPath);
@@ -18,6 +20,7 @@ public class ManejoSonido {
 				clip = AudioSystem.getClip();
 				clip.open(audioInput);
 				clip.start();
+				estaEncendida = true;
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -26,5 +29,16 @@ public class ManejoSonido {
 	
 	public void musicaDia() {
 		musica("salio.wav");
+	}
+	
+	public void pararIniciarMusica() {
+		if(estaEncendida) {
+			estaEncendida = false;
+			clip.stop();
+		}
+		else {
+			estaEncendida = true;
+			clip.start();
+		}
 	}
 }

@@ -29,7 +29,7 @@ public class Ventana {
 	private JPanel panelTablero;
 	private ManejoSonido miSonido;
 	private int plantaClick;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -38,7 +38,7 @@ public class Ventana {
 			public void run() {
 				try {
 					Ventana window = new Ventana();
-					window.frame.setVisible(true);
+					window.frame.setVisible(true);					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -97,7 +97,8 @@ public class Ventana {
 	
 	public void generarSol(Coordenada c) {
 		JLabel sol = new JLabel();
-		sol.setBounds(c.getX(), c.getY(), 30, 30);
+		System.out.println("Posicion (X,Y):" + c.getX() + "," + c.getY());
+		sol.setBounds(c.getX() * 100, c.getY() * 100, 30, 30);
 		ImageIcon i = new ImageIcon(getClass().getResource("/imagenes/sol.png"));
 		sol.setIcon(i);
 		sol.addMouseListener(new MouseAdapter() {
@@ -226,9 +227,18 @@ public class Ventana {
 				public void mouseClicked(MouseEvent e) {
 					plantaClick = x + 1;
 				}
-			});
+			});			
 			panelJuego.add(tienda);
 		}
+		JButton botonMusica = new JButton();
+		botonMusica.setText("Musica");
+		botonMusica.setBounds(xIni + 800, 625, 80, 60);
+		botonMusica.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				miSonido.pararIniciarMusica();
+			}
+		});
+		panelJuego.add(botonMusica);
 	}
 	
 	private void clickEnTil(JLabel j) {

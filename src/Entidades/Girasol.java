@@ -9,8 +9,10 @@ import GUI.Sprite;
 import Juego.Juego;
 
 public class Girasol extends PlantaGeneradora{
+	
+	
 	public Girasol(Coordenada c) {
-		segundos = 1;//Setear segundos;
+		segundos = 0;//Setear segundos;
 		soles = 1;//Setear soles;
 		vida = 100;
 		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/sunflower.gif"));
@@ -21,8 +23,12 @@ public class Girasol extends PlantaGeneradora{
 	}
 	
 	public void actuar() {
-		Juego j = Juego.obtenerInstancia(null);
-		j.generarSol( coord );
+		segundos += 2000;
+		if(segundos==25000) {
+			Juego j = Juego.obtenerInstancia(null);
+			j.generarSol( coord );
+			segundos = 0;
+		}
 	}
 
 }

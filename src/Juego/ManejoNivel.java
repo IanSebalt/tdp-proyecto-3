@@ -18,11 +18,11 @@ public class ManejoNivel {
 			OutputStream archivo = new FileOutputStream("Niveles.properties");
 			prop.setProperty("OleadasNivel1", "5");
 			prop.setProperty("Nivel1Soles", "100");
-			prop.setProperty("Nivel1_Oleada1ZombieBasico", "10");
+			prop.setProperty("Nivel1_Oleada1ZombieBasico", "5");
 			prop.setProperty("Nivel1_Oleada1ZombieRobusto", "0");
 			prop.setProperty("Nivel1_Oleada1ZombieEspecial", "0");
 			
-			prop.setProperty("Nivel1_Oleada2ZombieBasico", "11");
+			prop.setProperty("Nivel1_Oleada2ZombieBasico", "5");
 			prop.setProperty("Nivel1_Oleada2ZombieRobusto", "2");
 			prop.setProperty("Nivel1_Oleada2ZombieEspecial", "2");
 			

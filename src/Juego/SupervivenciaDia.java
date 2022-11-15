@@ -14,6 +14,7 @@ public class SupervivenciaDia extends ModoDeJuego{
 	protected int cronometro;
 	
 	public SupervivenciaDia(Juego j) {
+		super.miJuego = j;
 		super.fabricaPlan = new FabricaPlantaDia();
 		super.fabricaZom = new FabricaZombieDia();
 		this.cronometro = 0;
@@ -21,8 +22,8 @@ public class SupervivenciaDia extends ModoDeJuego{
 	
 	public void accionModo(int seg) {
 		if (cronometro == 10000) {
-			int randomY = ThreadLocalRandom.current().nextInt(0, 8);
-			int randomX = ThreadLocalRandom.current().nextInt(0, 5);			
+			int randomX = ThreadLocalRandom.current().nextInt(0, 10);
+			int randomY = ThreadLocalRandom.current().nextInt(0, 7);			
 			miJuego.generarSol(new Coordenada(randomX, randomY));
 			cronometro = 0;
 		}

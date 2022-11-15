@@ -1,10 +1,7 @@
 package Escenario;
 
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
-
 import Entidades.*;
 
 public class Grilla {
@@ -61,7 +58,7 @@ public class Grilla {
 		Planta [] filaPlantas = matriz[fila].getFilaPlanta();
 		boolean encontre = false;
 		int i = filaPlantas.length - 1;
-		while( i > 0 && !encontre) {
+		while( i >= 0 && !encontre) {
 			if(filaPlantas[i] != null) {
 				encontre = true;
 				toReturn = filaPlantas[i];

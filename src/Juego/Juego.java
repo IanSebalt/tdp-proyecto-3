@@ -128,6 +128,7 @@ public class Juego {
 		if(oleadaActual < oleadasTotal ) {
 			oleadaActual++;
 			generarNivel(nivelActual, oleadaActual);
+			//miVentana.cambioOleada(oleadaActual);
 		}else{ //Es la ultima oleada
 			if( hayZombiesEnGrilla() == false ) {
 				if( nivelActual < 2 ) {
@@ -185,20 +186,19 @@ public class Juego {
 	}
 	
 	public void generarOleada() {
-		while(zombiesRobustos>0 || zombiesEspeciales>0 || zombiesBasicos>0) {
-			if(zombiesRobustos>0) {
-				generarZombie(3);
-				zombiesRobustos--;
-			}
-			if(zombiesBasicos>0) {
-				generarZombie(1);
-				zombiesBasicos--;
-			}
-			if(zombiesEspeciales>0) {
-				generarZombie(2);
-				zombiesEspeciales--;
-			}
+		int num = ThreadLocalRandom.current().nextInt(1, 5);
+		if(zombiesRobustos>0 && (num == 3)) {
+			generarZombie(3);
+			zombiesRobustos--;
 		}
+		if(zombiesBasicos>0 && (num == 1 || num == 4) ) {
+			generarZombie(1);
+			zombiesBasicos--;
+		}
+		if(zombiesEspeciales>0 && num ==2) {
+			generarZombie(2);
+			zombiesEspeciales--;
+		}		
 	}
 	
 	public void generarProyectil(Coordenada c, Proyectil p) {
@@ -209,7 +209,7 @@ public class Juego {
 	
 	public void moverZombies() {
 		miGrilla.moverZombies();
-	}
+	}	
 	
 	public void matarPlanta(Planta p) {
 		miGrilla.matarPlanta(p.getCoordenada());
@@ -229,11 +229,11 @@ public class Juego {
 	}
 	
 	public void generarLapida(Coordenada cor) {
-		//miVentana.generarLapida(cor);
+		miVentana.generarLapida(cor);
 	}
 	
 	public void generarSol(Coordenada cor) {
-		//miVentana.generarSol(cor);
+		miVentana.generarSol(cor);
 	}
 	
 	public void moverProyectiles() {
@@ -262,5 +262,8 @@ public class Juego {
 		ControlProyectil cProyectil = new ControlProyectil(this);
 		Thread hiloProyectil = new Thread(cProyectil);
 		hiloProyectil.start();
+		Control controlJuego = new Control(this);
+		Thread hiloJuego = new Thread(controlJuego);
+		hiloJuego.start();
 	}
 }
