@@ -1,6 +1,5 @@
 package Fabricas;
 
-import Entidades.*;
 import Entidades.PlantaDisparadora;
 import Entidades.PlantaGeneradora;
 import Entidades.PlantaRobusta;

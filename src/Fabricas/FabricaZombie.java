@@ -1,7 +1,6 @@
 package Fabricas;
 
 
-import Entidades.*;
 import Entidades.ZombieBasico;
 import Entidades.ZombieEspecial;
 import Entidades.ZombieRobusto;
