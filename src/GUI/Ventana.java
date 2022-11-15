@@ -29,7 +29,13 @@ public class Ventana {
 	private JPanel panelTablero;
 	private ManejoSonido miSonido;
 	private int plantaClick;
-	
+
+	private static final int ancho = 100;
+	private static final int largo = 100;
+	private static final int xInicial = 1000;
+	private static final int cols = 9;
+	private static final int filas = 6;
+
 	/**
 	 * Launch the application.
 	 */
@@ -81,11 +87,11 @@ public class Ventana {
 		panelGhost.add(e.getSprite());
 		panelGhost.revalidate();
 		panelGhost.repaint();
-		e.getSprite().mover(1000, e.getCoordenada().getY() * 100);
+		e.getSprite().mover(xInicial, e.getCoordenada().getY() * largo);
 	}
 	
 	public void eliminarPlanta(Planta p) {		
-		JLabel cont = (JLabel) panelTablero.getComponentAt(p.getCoordenada().getX() * 100, p.getCoordenada().getY() * 100);
+		JLabel cont = (JLabel) panelTablero.getComponentAt(p.getCoordenada().getX() * ancho, p.getCoordenada().getY() * largo);
 		cont.remove(p.getSprite());
 		cont.repaint();
 	}
@@ -114,7 +120,7 @@ public class Ventana {
 	public void generarLapida(Coordenada c) {
 		JLabel cont = (JLabel) panelTablero.getComponentAt(c.getX(), c.getY());
 		JLabel lap = new JLabel();
-		lap.setBounds(0, 0, 100, 100);
+		lap.setBounds(0, 0, ancho, largo);
 		ImageIcon i = new ImageIcon(getClass().getResource("/imagenes/grave.png"));
 		lap.setIcon(i);
 		cont.add(lap);
@@ -165,7 +171,7 @@ public class Ventana {
 			panelJuego.setOpaque(false);
 			panelGhost = new JPanel();
 			panelGhost.setLayout(null);
-			panelGhost.setBounds(0, 0, 900, 600);
+			panelGhost.setBounds(0, 0, cols * largo, filas * ancho);
 			panelGhost.setOpaque(false);
 			panelMain.add(panelGhost);
 			generarTablero();
@@ -180,18 +186,18 @@ public class Ventana {
 	private void generarTablero() {
 		panelTablero = new JPanel();
 		panelTablero.setLayout(null);
-		panelTablero.setBounds(0, 0, 900, 600);
+		panelTablero.setBounds(0, 0, cols * largo, filas * ancho);
 		panelTablero.setOpaque(false);
 		JLabel dummy = new JLabel();
 		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/grasstile.png"));
 		ImageIcon imgh = new ImageIcon(getClass().getResource("/imagenes/grasstile-hovered.png"));
-		dummy.setSize(100, 100);
+		dummy.setSize(ancho, largo);
 		reDimensionar(dummy, img);
 		reDimensionar(dummy, imgh);
 		for(int i = 0; i < 6; i++) {
 			for(int j = 0; j < 9; j++) {
 				JLabel til = new JLabel();
-				til.setBounds(j * 100, i * 100, 100, 100);
+				til.setBounds(j * ancho, i * largo, ancho, largo);
 				til.setIcon(img);
 				til.setOpaque(false);
 				til.addMouseListener(new MouseAdapter() {
@@ -219,7 +225,7 @@ public class Ventana {
 		int yIni = 600;
 		for(int i = 0; i < 3; i++) {
 			JLabel tienda = new JLabel();
-			tienda.setBounds(xIni + (i * 100), yIni, 100, 100);
+			tienda.setBounds(xIni + (i * ancho), yIni, ancho, largo);
 			ImageIcon img = new ImageIcon(getClass().getResource(Juego.obtenerInstancia(null).getModo().getPlantas()[i]));
 			tienda.setIcon(img);
 			int x = i;
@@ -243,10 +249,10 @@ public class Ventana {
 	
 	private void clickEnTil(JLabel j) {
 		if(plantaClick != 0) {
-			Planta plantaE = Juego.obtenerInstancia(null).generarPlanta(plantaClick, j.getX() / 100, j.getY() / 100);
+			Planta plantaE = Juego.obtenerInstancia(null).generarPlanta(plantaClick, j.getX() / ancho, j.getY() / largo);
 			if(plantaE != null) {
 				Sprite planta = plantaE.getSprite();
-				planta.setBounds(0, 0, 100, 100);
+				planta.setBounds(0, 0, ancho, largo);
 				ImageIcon img = planta.getImg();
 				planta.setIcon(img);
 				j.add(planta);
