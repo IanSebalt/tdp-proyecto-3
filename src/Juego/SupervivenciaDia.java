@@ -41,7 +41,7 @@ public class SupervivenciaDia extends ModoDeJuego{
 	}
 
 	public String[] getPlantas() {
-		String[] retornar = {"/imagenes/sunflower.gif", "/imagenes/wallnut.gif", "/imagenes/lanzaguisantes.gif"};
+		String[] retornar = {"/imagenes/girasol-precio.png", "/imagenes/nuez-precio.png", "/imagenes/lanzaguisantes-precio.png"};
 		return retornar;
 	}
 	

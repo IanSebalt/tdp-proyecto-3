@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 import Entidades.Entidad;
 import Entidades.Planta;
@@ -17,7 +18,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.Duration;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class Ventana {
 
@@ -117,6 +120,33 @@ public class Ventana {
 		panelGhost.add(sol);
 	}
 	
+	public void mostrarCambioOleada() {
+		JLabel transicion = new JLabel();
+		transicion.setBounds(100, 50, 700, 300);
+		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/oleada.png"));
+		transicion.setIcon(img);
+		panelGhost.add(transicion);
+		ActionListener t = new ActionListener() {
+			public void actionPerformed(ActionEvent evt) {
+				panelGhost.remove(transicion);
+				panelGhost.repaint();
+			}
+		};
+		Timer time = new Timer(3000, t);
+		time.setRepeats(false);
+		time.start();
+	}
+	
+	public boolean pedirVolver() {
+		String [] opciones = {"Menú", "Siguiente nivel"};
+		int opt = JOptionPane.showOptionDialog(panelMain, "¿Quiere volver al menú o pasar al siguiente nivel?", "Nivel", JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opciones, opciones[0]);
+		boolean retornar;
+		if(opt == 0)
+			retornar = true;
+		else retornar = false;
+		return retornar;
+	}
+	
 	public void generarLapida(Coordenada c) {
 		JLabel cont = (JLabel) panelTablero.getComponentAt(c.getX(), c.getY());
 		JLabel lap = new JLabel();
@@ -129,26 +159,41 @@ public class Ventana {
 	
 	private void abrirMenu() {
 		JButton btnJugar = new JButton("Jugar");
+		btnJugar.setFont(new Font("Unispace", Font.PLAIN, 11));
 		btnJugar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				funcionJugar();
 			}
 		});
-		btnJugar.setBounds(375, 191, 89, 23);
+		btnJugar.setBounds(375, 292, 89, 23);
 		panelMenu.add(btnJugar);
 		
 		JButton btnSalir = new JButton("Salir");
+		btnSalir.setFont(new Font("Unispace", Font.PLAIN, 11));
 		btnSalir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
-		btnSalir.setBounds(375, 303, 89, 23);
+		btnSalir.setBounds(375, 379, 89, 23);
 		panelMenu.add(btnSalir);
 		
 		JButton btnManual = new JButton("Manual");
-		btnManual.setBounds(375, 247, 89, 23);
+		btnManual.setFont(new Font("Unispace", Font.PLAIN, 11));
+		btnManual.setBounds(375, 334, 89, 23);
 		panelMenu.add(btnManual);
+		
+		JLabel title = new JLabel();
+		title.setBounds(90, 0, 700, 300);
+		ImageIcon t = new ImageIcon(getClass().getResource("/imagenes/niantas.png"));
+		title.setIcon(t);
+		panelMenu.add(title);
+		
+		JLabel background = new JLabel();
+		background.setBounds(0, 0, 900, 750);
+		ImageIcon back = new ImageIcon(getClass().getResource("/imagenes/background.png"));
+		background.setIcon(back);
+		panelMenu.add(background);
 	}
 	
 	public void terminarPartida() {
@@ -252,7 +297,7 @@ public class Ventana {
 			Planta plantaE = Juego.obtenerInstancia(null).generarPlanta(plantaClick, j.getX() / ancho, j.getY() / largo);
 			if(plantaE != null) {
 				Sprite planta = plantaE.getSprite();
-				planta.setBounds(0, 0, ancho, largo);
+				planta.setBounds(0, 0, ancho, largo	);
 				ImageIcon img = planta.getImg();
 				planta.setIcon(img);
 				j.add(planta);
