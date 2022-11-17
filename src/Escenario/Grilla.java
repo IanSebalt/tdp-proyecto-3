@@ -1,7 +1,10 @@
 package Escenario;
 
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
+
 import Entidades.*;
 
 public class Grilla {
@@ -70,38 +73,28 @@ public class Grilla {
 	
 	public synchronized void moverZombies() {
 		for(int i = 0; i<matriz.length; i++) {
-			@SuppressWarnings("unchecked")
-			LinkedList<Zombie> filaZombie = (LinkedList<Zombie>) matriz[i].getFilaZombie().clone();
+			List<Zombie> filaZombie = Collections.synchronizedList(matriz[i].getFilaZombie());
 			Iterator<Zombie> it = filaZombie.iterator();
-			//Iterator<Zombie> it = matriz[i].getFilaZombie().iterator();
 			while(it.hasNext()) {
 				Planta ultimaPlanta = getUltimaPlanta(i);
 				Proyectil ultimoProyectil = null;
 				Zombie zom = it.next();
+				
 				if(!matriz[i].getFilaProyectil().isEmpty()) {
 					ultimoProyectil = matriz[i].getFilaProyectil().getLast();
-				}				
-				if( ultimaPlanta == null ) {
-					if(ultimoProyectil != null) {
-						if(zom.getRectangulo().intersects(ultimoProyectil.getRectangulo())){
-							zom.visit(ultimoProyectil);
-						}
+				}		
+				if(ultimoProyectil != null) {
+					if(zom.getRectangulo().intersects(ultimoProyectil.getRectangulo())){
+						zom.visit(ultimoProyectil);
 					}
+				}
+				
+				if( ultimaPlanta == null ) {
 					zom.mover();
 				}else {
 					if(zom.getRectangulo().intersects(ultimaPlanta.getRectangulo())) {
 						zom.visit(ultimaPlanta);
-						if(ultimoProyectil != null) {
-							if(zom.getRectangulo().intersects(ultimoProyectil.getRectangulo())){
-								zom.visit(ultimoProyectil);
-							}
-						}
 					}else {
-						if(ultimoProyectil != null) {
-							if(zom.getRectangulo().intersects(ultimoProyectil.getRectangulo())){
-								zom.visit(ultimoProyectil);
-							}
-						}
 						zom.mover();
 					}
 				}

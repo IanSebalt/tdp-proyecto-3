@@ -13,6 +13,7 @@ public class SupervivenciaNoche extends ModoDeJuego{
 	protected int cronometro;
 	
 	public SupervivenciaNoche(Juego j) {
+		super.miJuego = j;
 		super.fabricaPlan = new FabricaPlantaNoche();
 		super.fabricaZom = new FabricaZombieNoche();
 		this.cronometro = 0;
@@ -20,8 +21,8 @@ public class SupervivenciaNoche extends ModoDeJuego{
 
 	public void accionModo(int seg) {
 		if (cronometro == 1000) {
-			int randomY = ThreadLocalRandom.current().nextInt(0, 8);
-			int randomX = ThreadLocalRandom.current().nextInt(0, 5);
+			int randomX = ThreadLocalRandom.current().nextInt(5, 9);
+			int randomY = ThreadLocalRandom.current().nextInt(0, 5);
 			miJuego.generarLapida(new Coordenada(randomX, randomY));			
 		}
 		cronometro += seg;
@@ -36,12 +37,14 @@ public class SupervivenciaNoche extends ModoDeJuego{
 
 	@Override
 	public String[] getCesped() {
-		// TODO Auto-generated method stub
-		return null;
+		String[] retornar =  {"/imagenes/grasstile.png", "/imagenes/grasstile-hovered.png"};
+		return retornar;
 	}
 
+
 	public String[] getPlantas() {
-		return null;
+		String[] retornar = {"/imagenes/setasolar-precio.png", "/imagenes/cactus-precio.png", "/imagenes/setadesesporada-precio.png"};
+		return retornar;
 	}
 
 	public FabricaPlanta getFabricaPlanta() {

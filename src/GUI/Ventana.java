@@ -147,7 +147,7 @@ public class Ventana {
 	}
 	
 	public void generarLapida(Coordenada c) {
-		JLabel cont = (JLabel) panelTablero.getComponentAt(c.getX(), c.getY());
+		JLabel cont = (JLabel) panelTablero.getComponentAt(c.getX()*100, c.getY()*100);
 		JLabel lap = new JLabel();
 		lap.setBounds(0, 0, ancho, largo);
 		ImageIcon i = new ImageIcon(getClass().getResource("/imagenes/grave.png"));
@@ -223,18 +223,38 @@ public class Ventana {
 			panelMain.add(panelJuego);
 			panelMain.repaint();
 			panelMain.revalidate();
+		}else {
+			j.setModo(2);
+			miSonido = new ManejoSonido();
+			miSonido.musicaDia();
+			panelMain.remove(panelMenu);
+			panelJuego = new JPanel();
+			panelJuego.setBounds(0, 0, 1264, 985);
+			panelJuego.setLayout(null);
+			panelJuego.setOpaque(false);
+			panelGhost = new JPanel();
+			panelGhost.setLayout(null);
+			panelGhost.setBounds(0, 0, cols * largo, filas * ancho);
+			panelGhost.setOpaque(false);
+			panelMain.add(panelGhost);
+			generarTablero();
+			generarTienda();
+			panelMain.add(panelJuego);
+			panelMain.repaint();
+			panelMain.revalidate();
 		}
 		j.empezarJuego();
 	}
 	
 	private void generarTablero() {
+		Juego juego = Juego.obtenerInstancia(this);
 		panelTablero = new JPanel();
 		panelTablero.setLayout(null);
 		panelTablero.setBounds(0, 0, cols * largo, filas * ancho);
 		panelTablero.setOpaque(false);
 		JLabel dummy = new JLabel();
-		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/grasstile.png"));
-		ImageIcon imgh = new ImageIcon(getClass().getResource("/imagenes/grasstile-hovered.png"));
+		ImageIcon img = new ImageIcon(getClass().getResource(juego.getCesped()[0]));
+		ImageIcon imgh = new ImageIcon(getClass().getResource(juego.getCesped()[1]));
 		dummy.setSize(ancho, largo);
 		reDimensionar(dummy, img);
 		reDimensionar(dummy, imgh);

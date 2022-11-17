@@ -15,7 +15,7 @@ public class SetaDesesporada extends PlantaDisparadora {
 		vida = 60;
 		costo = 0;
 		coord = c;
-		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/setadesesporadara.gif"));
+		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/setadesesporada.gif"));
 		miSprite = new Sprite(img);
 		miRectangulo = new Rectangle(0,0,100,100);
 	}

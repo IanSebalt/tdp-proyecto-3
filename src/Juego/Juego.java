@@ -105,9 +105,11 @@ public class Juego {
 	public void setModo(int m) {
 		if (m==1)
 			this.miModo = new SupervivenciaDia(this);
-		else
-			if(m==2)
-				this.miModo = new SupervivenciaNoche(this);
+		else if(m==2) {
+			this.miModo = new SupervivenciaNoche(this);
+		}
+				
+				
 	}
 	
 	public ModoDeJuego getModo() {
@@ -128,7 +130,7 @@ public class Juego {
 		if(oleadaActual < oleadasTotal ) {
 			oleadaActual++;
 			generarNivel(nivelActual, oleadaActual);
-			//miVentana.cambioOleada(oleadaActual);
+			miVentana.mostrarCambioOleada();
 		}else{ //Es la ultima oleada
 			if( hayZombiesEnGrilla() == false ) {
 				if( nivelActual < 2 ) {
@@ -228,6 +230,10 @@ public class Juego {
 		miModo.accionModo(seg);
 	}
 	
+	public String[] getCesped() {
+		return miModo.getCesped();
+	}
+ 	
 	public void generarLapida(Coordenada cor) {
 		miVentana.generarLapida(cor);
 	}
