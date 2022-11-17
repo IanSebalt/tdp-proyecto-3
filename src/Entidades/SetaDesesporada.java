@@ -10,7 +10,7 @@ import Juego.Juego;
 
 public class SetaDesesporada extends PlantaDisparadora {
 	public SetaDesesporada(Coordenada c) {
-		segundos = 1;//Setear segundos;
+		segundos = 0;//Setear segundos;
 		dmg = 15;//Setear dmg;
 		vida = 60;
 		costo = 0;
@@ -21,9 +21,14 @@ public class SetaDesesporada extends PlantaDisparadora {
 	}
 	
 	public void actuar() {
-		Proyectil p = new Proyectil(dmg, coord, miRectangulo);
+		segundos += 500;
 		Juego j = Juego.obtenerInstancia(null);
-		j.generarProyectil(coord, p);
+		if(j.hayZombieFila(coord) && segundos == 1500) {
+			Proyectil p = new Proyectil(dmg, coord, miRectangulo);
+			j.generarProyectil(coord, p);
+		}
+		if(segundos>=1500)
+			segundos = 0;
 	}
 	
 }

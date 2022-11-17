@@ -39,21 +39,30 @@ public class SupervivenciaNoche extends ModoDeJuego{
 	 * @param seg - segundos a aumentar para ir generando lápidas y zombies.
 	 */
 	public void accionModo(int seg) {
-		if (cronometro == 1000 && cantLapidas<=3) {
+		cronometro += seg;
+		if (cantLapidas<3) {
 			int randomX = ThreadLocalRandom.current().nextInt(5, 9);
 			int randomY = ThreadLocalRandom.current().nextInt(0, 5);
 			Coordenada nuevaCor = new Coordenada(randomX, randomY);
-			miJuego.generarLapida(nuevaCor);
-			lapidas [cantLapidas] = nuevaCor; 
+			if(cantLapidas == 0) {
+				lapidas [cantLapidas] = nuevaCor;
+				cantLapidas++;
+				miJuego.generarLapida(nuevaCor, cantLapidas);
+			}else			
+				if(cantLapidas>0 && (lapidas[cantLapidas-1].getX() != randomX || lapidas[cantLapidas-1].getY() != randomY)) {
+					lapidas [cantLapidas] = nuevaCor;
+					cantLapidas++;
+					miJuego.generarLapida(nuevaCor, cantLapidas);
+				}
 			cronometro = 0;
 		}
 		else
-			if(cronometro == 10000) {
-				int randomLap = ThreadLocalRandom.current().nextInt(0, 3);
-				miJuego.generarZombieEnLapida(lapidas[randomLap]);
+			if(miJuego.seGeneraronZombiesEnLapida() == false && miJuego.cantidadZombiesParaGenerarEnOleada() > 0 && cronometro == 20000) {
+				miJuego.generarOleada(2);
 				cronometro = 0;
 			}
-		cronometro += seg;
+		if(cronometro>=20000 || miJuego.seGeneraronZombiesEnLapida() == true)
+			cronometro = 0;
 	}
 
 	public String getFondo() {

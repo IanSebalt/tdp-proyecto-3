@@ -24,6 +24,8 @@ public class Juego {
 	
 	protected int zombiesBasicos, zombiesRobustos, zombiesEspeciales;
 	
+	boolean lapidasGeneradas;
+	
 	protected int oleadaActual;
 	
 	protected int oleadasTotal;
@@ -40,6 +42,8 @@ public class Juego {
 	
 	protected ManejoNivel miManejo;
 	
+	protected Coordenada lapidas [];
+	
 	
 	/**
 	 * Constructor privado para el uso del patrón singleton, en donde recibe una ventana
@@ -55,6 +59,8 @@ public class Juego {
 		this.miManejo = new ManejoNivel();
 		this.miControl = new Control(this);		
 		this.miModo = null;
+		this.lapidas = new Coordenada[3];
+		this.lapidasGeneradas = false;
 		miManejo.generarArchivoNivel();
 	}
 	
@@ -146,6 +152,7 @@ public class Juego {
 		if(oleadaActual < oleadasTotal ) {
 			oleadaActual++;
 			generarNivel(nivelActual, oleadaActual);
+			lapidasGeneradas = false;
 			miVentana.mostrarCambioOleada();
 		}else{ //Es la ultima oleada
 			if( hayZombiesEnGrilla() == false ) {
@@ -219,8 +226,8 @@ public class Juego {
 				nuevoZombie = fabricaZom.getZombieRobusto();
 				break;
 		}
-		nuevoZombie.setCoordenada(0, randomY);
-		nuevoZombie.getRectangulo().setLocation(1000, randomY * 100);
+		nuevoZombie.setCoordenada(9, randomY);
+		nuevoZombie.getRectangulo().setLocation(900, randomY * 100);
 		miGrilla.setZombie(nuevoZombie, randomY);
 		miVentana.crearEntidad(nuevoZombie);
 	}
@@ -229,9 +236,8 @@ public class Juego {
 	 * Método que genera un zombie en una lapida de forma aleatoria. El tipo de zombie es definido de forma aleatoria.
 	 * @param cord - coordenada de la lápida donde generar el zombie.
 	 */
-	public void generarZombieEnLapida(Coordenada cord) {
+	public void generarZombieEnLapida(int c, int lapida) {
 		FabricaZombie fabricaZom = miModo.getFabricaZombie();	
-		int c = ThreadLocalRandom.current().nextInt(1, 4);
 		Zombie nuevoZombie = null;
 		switch(c) {
 			case 1 :
@@ -244,9 +250,9 @@ public class Juego {
 				nuevoZombie = fabricaZom.getZombieRobusto();
 				break;
 		}
-		nuevoZombie.setCoordenada(cord.getX(), cord.getY());
-		nuevoZombie.getRectangulo().setLocation(1000, cord.getY() * 100);
-		miGrilla.setZombie(nuevoZombie, cord.getY());
+		nuevoZombie.setCoordenada(lapidas[lapida].getX(), lapidas[lapida].getY());
+		nuevoZombie.getRectangulo().setLocation(lapidas[lapida].getX() * 100, lapidas[lapida].getY() * 100);
+		miGrilla.setZombie(nuevoZombie, lapidas[lapida].getY());
 		miVentana.crearEntidad(nuevoZombie);
 	}
 	
@@ -254,20 +260,41 @@ public class Juego {
 	 * Método que genera la oleada de zombies de forma aleatoria en donde hay un 50% de generar zombies basicos y para el 
 	 * resto hay un 25% de que se generen.
 	 */
-	public void generarOleada() {
+	public void generarOleada(int n) {
 		int num = ThreadLocalRandom.current().nextInt(1, 5);
-		if(zombiesRobustos>0 && (num == 3)) {
+		int generado = 0;
+		if(zombiesRobustos>0 && (num == 3) && n == 1) {
 			generarZombie(3);
 			zombiesRobustos--;
 		}
-		if(zombiesBasicos>0 && (num == 1 || num == 4) ) {
+		if(zombiesBasicos>0 && (num == 1 || num == 4  && n == 1) ) {
 			generarZombie(1);
 			zombiesBasicos--;
 		}
-		if(zombiesEspeciales>0 && num ==2) {
+		if(zombiesEspeciales>0 && num ==2  && n == 1) {
 			generarZombie(2);
 			zombiesEspeciales--;
-		}		
+		}
+		while(generado<3 && lapidasGeneradas == false && n == 2) {
+			num = ThreadLocalRandom.current().nextInt(1, 5);
+			if(zombiesRobustos>0 && (num == 3)) {
+				generarZombieEnLapida(3, generado);
+				zombiesRobustos--;
+				generado++;
+			}
+			if(zombiesBasicos>0 && (num == 1 || num == 4)) {
+				generarZombieEnLapida(1, generado);
+				zombiesBasicos--;
+				generado++;
+			}
+			if(zombiesEspeciales>0 && num == 2) {
+				generarZombieEnLapida(2, generado);
+				zombiesEspeciales--;
+				generado++;
+			}
+		}
+		if(generado==3)
+			lapidasGeneradas = true;
 	}	
 	
 	/**
@@ -339,9 +366,11 @@ public class Juego {
 	/**
 	 * Método generar lápida para el modo supervivencia noche, en el que las genera en la coordenada recibida parámetro.
 	 * @param cor - coordenada donde generar la lápida.
+	 * @param cantLapidas - cantidadLapidas generadas.
 	 */
-	public void generarLapida(Coordenada cor) {
+	public void generarLapida(Coordenada cor, int cantLapidas) {
 		miVentana.generarLapida(cor);
+		lapidas[cantLapidas-1] = cor;
 	}
 	
 	/**
@@ -375,6 +404,14 @@ public class Juego {
 	 */
 	public boolean hayZombieFila(Coordenada c) {
 		return miGrilla.hayZombiesFila(c);
+	}
+	
+	/**
+	 * Método que retorna verdadero si se generaron los zombies en las lápidas, falso en caso contrario.
+	 * @return verdadero si se generaron zombies en las lapidas, falso en caso contrario.
+	 */
+	public boolean seGeneraronZombiesEnLapida() {
+		return lapidasGeneradas;
 	}
 	
 	/**

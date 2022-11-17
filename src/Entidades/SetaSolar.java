@@ -10,7 +10,7 @@ import Juego.Juego;
 
 public class SetaSolar extends PlantaGeneradora{
 	public SetaSolar(Coordenada c) {
-		segundos = 1;//Setear segundos;
+		segundos = 0;//Setear segundos;
 		soles = 1;//Setear soles;
 		vida = 100;
 		costo = 25;
@@ -21,8 +21,12 @@ public class SetaSolar extends PlantaGeneradora{
 	}
 	
 	public void actuar() {
-		Juego j = Juego.obtenerInstancia(null);
-		j.generarSol( coord );
+		segundos += 500;
+		if(segundos==24000) {
+			Juego j = Juego.obtenerInstancia(null);
+			j.generarSol( coord );
+			segundos = 0;
+		}
 	}
 
 }

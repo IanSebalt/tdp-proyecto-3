@@ -89,7 +89,7 @@ public class Ventana {
 		panelGhost.add(e.getSprite());
 		panelGhost.revalidate();
 		panelGhost.repaint();
-		e.getSprite().mover(xInicial, e.getCoordenada().getY() * largo);
+		e.getSprite().mover(e.getCoordenada().getX()* ancho, e.getCoordenada().getY() * largo);
 	}
 	
 	public void eliminarPlanta(Planta p) {		

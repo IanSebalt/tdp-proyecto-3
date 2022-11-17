@@ -73,7 +73,8 @@ public class Grilla {
 	
 	public synchronized void moverZombies() {
 		for(int i = 0; i<matriz.length; i++) {
-			List<Zombie> filaZombie = Collections.synchronizedList(matriz[i].getFilaZombie());
+			@SuppressWarnings("unchecked")
+			List<Zombie> filaZombie = Collections.synchronizedList((List<Zombie>) matriz[i].getFilaZombie().clone());
 			Iterator<Zombie> it = filaZombie.iterator();
 			while(it.hasNext()) {
 				Planta ultimaPlanta = getUltimaPlanta(i);
