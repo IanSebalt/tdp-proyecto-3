@@ -11,7 +11,7 @@ public class ControlProyectil extends Control{
 	public void run() {
 		while(continuar){
 			try {
-				Thread.sleep(50);
+				Thread.sleep(100);
 				miJuego.moverProyectiles();				
 			} catch (InterruptedException e) {
 				e.printStackTrace();

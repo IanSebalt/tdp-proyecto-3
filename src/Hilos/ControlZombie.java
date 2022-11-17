@@ -18,7 +18,7 @@ public class ControlZombie extends Control{
 					Thread.sleep(3000);
 				}
 				else
-					Thread.sleep(50);
+					Thread.sleep(100);
 				miJuego.moverZombies();
 				if( miJuego.cantidadZombiesParaGenerarEnOleada() > 0 ) {
 					spawn += 50;

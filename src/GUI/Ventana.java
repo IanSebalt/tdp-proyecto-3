@@ -106,7 +106,6 @@ public class Ventana {
 	
 	public void generarSol(Coordenada c) {
 		JLabel sol = new JLabel();
-		System.out.println("Posicion (X,Y):" + c.getX() + "," + c.getY());
 		sol.setBounds(c.getX() * 100, c.getY() * 100, 30, 30);
 		ImageIcon i = new ImageIcon(getClass().getResource("/imagenes/sol.png"));
 		sol.setIcon(i);

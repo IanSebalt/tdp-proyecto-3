@@ -25,6 +25,7 @@ public abstract class Zombie extends Entidad implements VisitorZombie{
 	public void visit(Proyectil p) {
 		p.recibirDmg(1);
 		recibirDmg(p.obtenerDmg());
+		System.out.println(vida);
 		if(vida <= 0) {
 			morir();
 		}

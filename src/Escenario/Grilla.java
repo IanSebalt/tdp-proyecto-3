@@ -137,8 +137,18 @@ public class Grilla {
 		return toReturn;
 	}
 	
-	public synchronized boolean hayZombiesFila(int fila) {
-		return matriz[fila].getFilaZombie().size()>0;
+	public synchronized boolean hayZombiesFila(Coordenada c) {
+		boolean toReturn = false;
+		LinkedList<Zombie> filaZombie = (LinkedList<Zombie>) matriz[c.getY()].getFilaZombie().clone();
+		Iterator<Zombie> it = filaZombie.iterator();
+		while(it.hasNext() && !toReturn) {
+			Zombie aux = it.next();
+			if( (int)(aux.getRectangulo().getX() / 100) >= c.getX()) {
+				
+				toReturn = true;
+			}
+		}
+		return toReturn;
 	}
 	
 }

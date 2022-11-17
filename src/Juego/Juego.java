@@ -216,8 +216,8 @@ public class Juego {
 		miVentana.eliminarPlanta(p);
 	}
 	public void matarZombie(Zombie z) {
-		miGrilla.matarZombie(z);
 		miVentana.eliminarEntidad(z);
+		miGrilla.matarZombie(z);
 	}
 	public void matarProyectil(Proyectil p) {
 		miGrilla.matarProyectil(p);
@@ -244,8 +244,8 @@ public class Juego {
 		miGrilla.actuarPlantas();
 	}
 	
-	public boolean hayZombieFila(int fila) {
-		return miGrilla.hayZombiesFila(fila);
+	public boolean hayZombieFila(Coordenada c) {
+		return miGrilla.hayZombiesFila(c);
 	}
 	
 	public void empezarJuego() {
