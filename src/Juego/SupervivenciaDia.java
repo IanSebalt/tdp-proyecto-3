@@ -9,10 +9,18 @@ import Fabricas.FabricaPlantaDia;
 import Fabricas.FabricaZombie;
 import Fabricas.FabricaZombieDia;
 
+/**
+ * Clase SupervicenciaDia que extiende ModoDeJuego para el modo de juego dia.
+ *
+ */
 public class SupervivenciaDia extends ModoDeJuego{
 	
 	protected int cronometro;
 	
+	/**
+	 * Constructor que recibe por parámetro el juego para enviar los respectivos mensajes.
+	 * @param j - juego a utilizar.
+	 */
 	public SupervivenciaDia(Juego j) {
 		super.miJuego = j;
 		super.fabricaPlan = new FabricaPlantaDia();
@@ -20,6 +28,11 @@ public class SupervivenciaDia extends ModoDeJuego{
 		this.cronometro = 0;
 	}
 	
+	/**
+	 * Método que genera soles de manera aleatoria y le manda un mensaje al juego para poder generarlos.
+	 * Estos soles se generan cada 10 segundos.
+	 * @param - segundos a sumar hasta que se generen los soles.
+	 */
 	public void accionModo(int seg) {
 		if (cronometro == 10000) {
 			int randomX = ThreadLocalRandom.current().nextInt(0, 10);

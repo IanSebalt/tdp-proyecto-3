@@ -23,7 +23,7 @@ public class Girasol extends PlantaGeneradora{
 	}
 	
 	public void actuar() {
-		segundos += 2000;
+		segundos += 1000;
 		if(segundos==25000) {
 			Juego j = Juego.obtenerInstancia(null);
 			j.generarSol( coord );

@@ -8,10 +8,14 @@ import Escenario.Coordenada;
 import GUI.Sprite;
 import Juego.Juego;
 
+/**
+ * Clase ControlZombie que extiende Control para el manejo del hilo dedicado a la actualización de los Zombies.
+ *
+ */
 public class Proyectil extends Entidad{
 	protected int dmg;
-	protected int velocidad = 15;
-	protected int anchoRectangulo = 100;
+	protected int velocidad = 7;
+	protected int anchoRectangulo = 50;
 	
 	public Proyectil(int d, Coordenada c, Rectangle rec) {
 		vida = 1;
@@ -20,7 +24,7 @@ public class Proyectil extends Entidad{
 		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/projectile.png"));
 		miSprite = new Sprite(img);
 		miRectangulo = new Rectangle(0,0, anchoRectangulo, (int)rec.getHeight());
-		miRectangulo.setLocation(c.getX()*100+50, c.getY()*100);
+		miRectangulo.setLocation((c.getX()*100) + 50, c.getY()*100);
 	}
 	
 	public void morir() {
@@ -29,6 +33,8 @@ public class Proyectil extends Entidad{
 	}
 	
 	public void mover() {
+		if(miSprite.getX()>=900)
+			morir();
 		miSprite.mover(miSprite.getX() + velocidad, miSprite.getY());
 		miRectangulo.setLocation(miSprite.getX() + velocidad, miSprite.getY());
 	}

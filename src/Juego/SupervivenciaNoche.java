@@ -8,49 +8,75 @@ import Fabricas.FabricaPlantaNoche;
 import Fabricas.FabricaZombie;
 import Fabricas.FabricaZombieNoche;
 
+
+/**
+ * Clase SupervicenciaNoche que extiende ModoDeJuego para el modo de juego noche.
+ *
+ */
 public class SupervivenciaNoche extends ModoDeJuego{
 	
 	protected int cronometro;
 	
+	protected Coordenada lapidas []; 
+		
+	protected int cantLapidas;
+	
+	/**
+	 * Constructor que recibe por parámetro el juego para enviar los respectivos mensajes.
+	 * @param j - juego a utilizar.
+	 */
 	public SupervivenciaNoche(Juego j) {
 		super.miJuego = j;
 		super.fabricaPlan = new FabricaPlantaNoche();
 		super.fabricaZom = new FabricaZombieNoche();
 		this.cronometro = 0;
+		lapidas = new Coordenada [3];
+		cantLapidas = 0;
 	}
-
+	
+	/**
+	 * Metodo que genera lápidas de forma aleatoria en el mapa y luego comienza a generar zombies en el lugar de las lápidas.
+	 * @param seg - segundos a aumentar para ir generando lápidas y zombies.
+	 */
 	public void accionModo(int seg) {
-		if (cronometro == 1000) {
+		if (cronometro == 1000 && cantLapidas<=3) {
 			int randomX = ThreadLocalRandom.current().nextInt(5, 9);
 			int randomY = ThreadLocalRandom.current().nextInt(0, 5);
-			miJuego.generarLapida(new Coordenada(randomX, randomY));			
+			Coordenada nuevaCor = new Coordenada(randomX, randomY);
+			miJuego.generarLapida(nuevaCor);
+			lapidas [cantLapidas] = nuevaCor; 
+			cronometro = 0;
 		}
+		else
+			if(cronometro == 10000) {
+				int randomLap = ThreadLocalRandom.current().nextInt(0, 3);
+				miJuego.generarZombieEnLapida(lapidas[randomLap]);
+				cronometro = 0;
+			}
 		cronometro += seg;
 	}
 
-	
-	@Override
 	public String getFondo() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
 	public String[] getCesped() {
 		String[] retornar =  {"/imagenes/grasstile.png", "/imagenes/grasstile-hovered.png"};
 		return retornar;
 	}
 
-
+	
 	public String[] getPlantas() {
 		String[] retornar = {"/imagenes/setasolar-precio.png", "/imagenes/cactus-precio.png", "/imagenes/setadesesporada-precio.png"};
 		return retornar;
 	}
-
+	
+	
 	public FabricaPlanta getFabricaPlanta() {
 		return fabricaPlan;
-	}
-
+	}	
+	
 	public FabricaZombie getFabricaZombie() {
 		return fabricaZom;
 	}

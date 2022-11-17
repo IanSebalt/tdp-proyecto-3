@@ -8,7 +8,7 @@ import GUI.Sprite;
 public class Comun extends ZombieBasico{
 	public Comun() {
 		vida = 80;
-		velocidad = 2;
+		velocidad = 1;
 		dmg = 10;
 		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/zombie.gif"));
 		miSprite = new Sprite(img);

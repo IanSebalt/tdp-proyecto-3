@@ -87,11 +87,18 @@ public class Juego {
 		this.puntosSoles -= s;
 	}
 	
+	/**
+	 * Método que retorna la cantidad de zombies a generar.
+	 * @return cantidad de zombies a generar.
+	 */
 	public int cantidadZombiesParaGenerarEnOleada() {
 		return zombiesBasicos + zombiesEspeciales + zombiesRobustos;
 	}
 	
-	
+	/**
+	 * Método que retorna verdadero si hay zombies en la grilla y falso en caso contrario.
+	 * @return verdadero si hay zombies en la grilla, falso en caso contrario.
+	 */
 	public boolean hayZombiesEnGrilla() {
 		return miGrilla.hayZombies();
 	}
@@ -116,6 +123,11 @@ public class Juego {
 		return miModo;
 	}
 	
+	/**
+	 * Carga del archivo Niveles.properties la cantidad de zombies a generar en el nivel y oleada recibida por parámetro.
+	 * @param nivel - nivel a cargar.
+	 * @param oleada - oleada a cargar.
+	 */
 	public void generarNivel(int nivel,int oleada) {
 		nivelActual = nivel;
 		oleadaActual = oleada;
@@ -126,6 +138,10 @@ public class Juego {
 		oleadasTotal = miManejo.getInformacion("OleadasNivel" + nivel);
 	}
 	
+	/**
+	 * Método que chequea si hay oleadas en el nivel. Si es verdadero entonces avanza a la siguiente oleada,
+	 * sino avanza al siguiente nivel.
+	 */
 	public void manejoOleada() {
 		if(oleadaActual < oleadasTotal ) {
 			oleadaActual++;
@@ -144,49 +160,100 @@ public class Juego {
 		}
 	}
 	
+	/**
+	 * Método para avanzar al siguiente nivel iniciando desde la primera oleada y llamando al metodo generarNivel para
+	 * volver a cargar los zombies a generar.
+	 */
 	public void siguienteNivel() {
 		nivelActual++;
 		oleadaActual = 1;
 		generarNivel(nivelActual, oleadaActual);
 	}
 	
+	/**
+	 * Método que genera una planta en la posición (x,y) recibida por parámetro y el tipo de planta se define con el entero 'c'.
+	 * Luego la retorna.
+	 * @param c - tipo de planta a generar.
+	 * @param x - posición x en el escenario.
+	 * @param y - posición y en el escenario.
+	 * @return la planta generada.
+	 */
 	public Planta generarPlanta(int c, int x, int y) {
 		Planta retornar = null;
 		FabricaPlanta fabricaPlan = miModo.getFabricaPlanta();
 		Coordenada coord = new Coordenada(x,y);
 		if(miGrilla.getPlanta(coord) == null) {
-			if(c == 1) 
-				retornar = fabricaPlan.getPlantaGeneradora(coord);			
-			else
-				if(c == 2)
+			switch(c) {
+				case 1 : 
+					retornar = fabricaPlan.getPlantaGeneradora(coord);	
+					break;
+				case 2 :
 					retornar = fabricaPlan.getPlantaRobusta(coord);
-				else
-					if(c == 3)
-						retornar = fabricaPlan.getPlantaDisparadora(coord);
+					break;
+				case 3 :
+					retornar = fabricaPlan.getPlantaDisparadora(coord);
+					break;
+			}
 			retornar.getRectangulo().setLocation(x*100, y*100);
 			miGrilla.setPlanta(retornar, coord);
 		}
 		return retornar;
 	}
 	
+	/**
+	 * Método que genera un zombie en una fila de forma aleatoria. El tipo de zombie es definido por el entero recibido por parámetro.
+	 * @param c - tipo de zombie a generar.
+	 */
 	public void generarZombie(int c) {
 		int randomY = ThreadLocalRandom.current().nextInt(0, 6);
 		FabricaZombie fabricaZom = miModo.getFabricaZombie();		
 		Zombie nuevoZombie = null;
-		if(c == 1)
-			nuevoZombie = fabricaZom.getZombieBasico();
-		else
-			if(c == 2)
+		switch(c) {
+			case 1 :
+				nuevoZombie = fabricaZom.getZombieBasico();
+				break;
+			case 2 :
 				nuevoZombie = fabricaZom.getZombieEspecial();
-			else
-				if(c == 3)
-					nuevoZombie = fabricaZom.getZombieRobusto();
+				break;
+			case 3 :
+				nuevoZombie = fabricaZom.getZombieRobusto();
+				break;
+		}
 		nuevoZombie.setCoordenada(0, randomY);
 		nuevoZombie.getRectangulo().setLocation(1000, randomY * 100);
 		miGrilla.setZombie(nuevoZombie, randomY);
 		miVentana.crearEntidad(nuevoZombie);
 	}
 	
+	/**
+	 * Método que genera un zombie en una lapida de forma aleatoria. El tipo de zombie es definido de forma aleatoria.
+	 * @param cord - coordenada de la lápida donde generar el zombie.
+	 */
+	public void generarZombieEnLapida(Coordenada cord) {
+		FabricaZombie fabricaZom = miModo.getFabricaZombie();	
+		int c = ThreadLocalRandom.current().nextInt(1, 4);
+		Zombie nuevoZombie = null;
+		switch(c) {
+			case 1 :
+				nuevoZombie = fabricaZom.getZombieBasico();
+				break;
+			case 2 :
+				nuevoZombie = fabricaZom.getZombieEspecial();
+				break;
+			case 3 :
+				nuevoZombie = fabricaZom.getZombieRobusto();
+				break;
+		}
+		nuevoZombie.setCoordenada(cord.getX(), cord.getY());
+		nuevoZombie.getRectangulo().setLocation(1000, cord.getY() * 100);
+		miGrilla.setZombie(nuevoZombie, cord.getY());
+		miVentana.crearEntidad(nuevoZombie);
+	}
+	
+	/**
+	 * Método que genera la oleada de zombies de forma aleatoria en donde hay un 50% de generar zombies basicos y para el 
+	 * resto hay un 25% de que se generen.
+	 */
 	public void generarOleada() {
 		int num = ThreadLocalRandom.current().nextInt(1, 5);
 		if(zombiesRobustos>0 && (num == 3)) {
@@ -201,59 +268,119 @@ public class Juego {
 			generarZombie(2);
 			zombiesEspeciales--;
 		}		
-	}
+	}	
 	
+	/**
+	 * Método que genera proyectiles en la coordenada recibida por parámetro y le manda el mensaje a ventana para generarlo
+	 * gráficamente.
+	 * @param c - coordenada a generar el proyectil.
+	 * @param p - proyectil a generar en la ventana.
+	 */
 	public void generarProyectil(Coordenada c, Proyectil p) {
 		miGrilla.setProyectil(p, c);
 		miVentana.crearEntidad(p);
 		p.getSprite().mover(c.getX()*100+50, c.getY() * 100);
 	}
 	
+	/**
+	 * Método que le manda el mensaje a la grilla para mover todos los zombies de la misma.
+	 */
 	public void moverZombies() {
 		miGrilla.moverZombies();
 	}	
-	
+	 /**
+	  * Método que elimina de la gráfica la planta recibida por parámetro y le manda el mensaje a la grilla para que la
+	  * elimine de la misma.
+	  * @param p - planta a eliminar.
+	  */
 	public void matarPlanta(Planta p) {
 		miGrilla.matarPlanta(p.getCoordenada());
 		miVentana.eliminarPlanta(p);
 	}
+	
+	/**
+	  * Método que elimina de la gráfica el zombie recibida por parámetro y le manda el mensaje a la grilla para que lo
+	  * elimine de la misma.
+	  * @param z - zombie a eliminar.
+	  */
 	public void matarZombie(Zombie z) {
 		miVentana.eliminarEntidad(z);
 		miGrilla.matarZombie(z);
 	}
+	
+	/**
+	  * Método que elimina de la gráfica el proyectil recibida por parámetro y le manda el mensaje a la grilla para que lo
+	  * elimine de la misma.
+	  * @param p - proyectil a eliminar.
+	  */
 	public void matarProyectil(Proyectil p) {
 		miGrilla.matarProyectil(p);
 		miVentana.eliminarEntidad(p);
 	}
 	
+	/**
+	 * Método que le manda un mensaje al modo de juego para que ejecute su acción cada 'seg'. En caso de que sea el modo día se generaran soles
+	 * caso que sea modo noche se generarán lápidas de manera aleatoria en el escenario.
+	 * @param seg - segundos para que la accionModo se ejecute.
+	 */
 	public void accionModo(int seg) {
 		miModo.accionModo(seg);
 	}
 	
+	/**
+	 * Método que retorna el cesped del modo de juego.
+	 * @return el cesped de modo de juego.
+	 */
 	public String[] getCesped() {
 		return miModo.getCesped();
 	}
  	
+
+	/**
+	 * Método generar lápida para el modo supervivencia noche, en el que las genera en la coordenada recibida parámetro.
+	 * @param cor - coordenada donde generar la lápida.
+	 */
 	public void generarLapida(Coordenada cor) {
 		miVentana.generarLapida(cor);
 	}
 	
+	/**
+	 * Método generarSol para el modo superviencia dia y para las plantas generadoras.
+	 * Genera soles en la coordenada recibida por parámetro mandandole un mensaje a la ventana para hacerlo gráfico.
+	 * @param cor - coordenada donde generar el sol.
+	 */
 	public void generarSol(Coordenada cor) {
 		miVentana.generarSol(cor);
 	}
 	
+	/**
+	 * Método que le manda un mensaje a la grilla para mover todos sus proyectiles.
+	 */
 	public void moverProyectiles() {
 		miGrilla.moverProyectiles();
 	}
 	
+	/**
+	 * Método que le manda un mensaje a la grilla para ejecutar todas las acciones que realizan 
+	 * las plantas colocadas en la grilla.
+	 */
 	public void actuarPlantas() {
 		miGrilla.actuarPlantas();
 	}
 	
+	/**
+	 * Método que retorna verdadero si hay zombies en la fila recibida por parámetro, falso en caso contrario.
+	 * @param c - Coordenada donde chequear la fila.
+	 * @return verdadero si hay zombies en la fila, falso caso contrario.
+	 */
 	public boolean hayZombieFila(Coordenada c) {
 		return miGrilla.hayZombiesFila(c);
 	}
 	
+	/**
+	 * Método que inicia el juego en el primer nivel y primera oleada y crea los hilos para manejar cada entidad y los inicia.
+	 * Tambien se crea la grilla con una cantidad de 6 filas.
+	 */
 	public void empezarJuego() {
 		nivelActual = 1;
 		oleadaActual = 1;

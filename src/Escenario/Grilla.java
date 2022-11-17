@@ -110,9 +110,10 @@ public class Grilla {
 				}
 	}
 
+	@SuppressWarnings("unchecked")
 	public synchronized void moverProyectiles() {
 		for(int i = 0; i<matriz.length; i++)
-			for(Proyectil p : matriz[i].getFilaProyectil())
+			for(Proyectil p : (LinkedList<Proyectil>) matriz[i].getFilaProyectil().clone())
 				if(p != null) {
 					p.mover();		
 				}
@@ -132,6 +133,7 @@ public class Grilla {
 	
 	public synchronized boolean hayZombiesFila(Coordenada c) {
 		boolean toReturn = false;
+		@SuppressWarnings("unchecked")
 		LinkedList<Zombie> filaZombie = (LinkedList<Zombie>) matriz[c.getY()].getFilaZombie().clone();
 		Iterator<Zombie> it = filaZombie.iterator();
 		while(it.hasNext() && !toReturn) {
