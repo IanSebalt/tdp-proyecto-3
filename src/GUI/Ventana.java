@@ -131,6 +131,7 @@ public class Ventana {
 			}
 		};
 		Timer time = new Timer(3000, t);
+		actualizarSoles();
 		time.setRepeats(false);
 		time.start();
 	}
@@ -208,6 +209,7 @@ public class Ventana {
 		panelTablero.removeAll();
 		generarTablero();
 		panelJuego.repaint();
+		actualizarSoles();
 	}
 	
 	private void funcionJugar() {

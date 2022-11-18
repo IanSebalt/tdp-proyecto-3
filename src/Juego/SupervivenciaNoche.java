@@ -40,7 +40,7 @@ public class SupervivenciaNoche extends ModoDeJuego{
 	 */
 	public void accionModo(int seg) {
 		cronometro += seg;
-		if (cantLapidas<3) {
+		while(cantLapidas<3) {
 			int randomX = ThreadLocalRandom.current().nextInt(5, 9);
 			int randomY = ThreadLocalRandom.current().nextInt(0, 5);
 			Coordenada nuevaCor = new Coordenada(randomX, randomY);
@@ -56,13 +56,14 @@ public class SupervivenciaNoche extends ModoDeJuego{
 				}
 			cronometro = 0;
 		}
-		else
-			if(miJuego.seGeneraronZombiesEnLapida() == false && miJuego.cantidadZombiesParaGenerarEnOleada() > 0 && cronometro == 20000) {
-				miJuego.generarOleada(2);
-				cronometro = 0;
-			}
+		if(miJuego.seGeneraronZombiesEnLapida() == false && miJuego.cantidadZombiesParaGenerarEnOleada() > 0 && cronometro == 20000) {
+			miJuego.generarOleada(2);
+			cronometro = 0;
+		}
 		if(cronometro>=20000 || miJuego.seGeneraronZombiesEnLapida() == true)
 			cronometro = 0;
+		if(miJuego.getLapidas()[0]==null && miJuego.seGeneraronZombiesEnLapida() == false)
+			cantLapidas = 0;
 	}
 
 	public String getFondo() {

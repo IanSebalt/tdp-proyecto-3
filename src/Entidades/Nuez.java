@@ -14,7 +14,7 @@ public class Nuez extends PlantaRobusta {
 		vida = 200;
 		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/wallnut.gif"));
 		miSprite = new Sprite(img);
-		costo = 100;
+		costo = 50;
 		coord = c;
 		miRectangulo = new Rectangle(0,0,100,100);
 	}

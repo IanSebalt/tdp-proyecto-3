@@ -15,7 +15,7 @@ public class LanzaGuisantes extends PlantaDisparadora{
 		vida = 100;
 		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/lanzaguisantes.gif"));
 		miSprite = new Sprite(img);
-		costo = 100;
+		costo = 50;
 		coord = c;
 		miRectangulo = new Rectangle(0,0,100,100);
 	}
@@ -24,7 +24,7 @@ public class LanzaGuisantes extends PlantaDisparadora{
 		Juego j = Juego.obtenerInstancia(null);
 		segundos += 500;
 		if(j.hayZombieFila(coord) && segundos == 1500) {
-			Proyectil p = new Proyectil(dmg, coord, miRectangulo);		
+			Proyectil p = new Proyectil(dmg, coord, miRectangulo, "/imagenes/projectile.png");		
 			j.generarProyectil(coord, p);
 		}
 		if(segundos>=1500)

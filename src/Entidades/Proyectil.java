@@ -14,14 +14,14 @@ import Juego.Juego;
  */
 public class Proyectil extends Entidad{
 	protected int dmg;
-	protected int velocidad = 7;
+	protected int velocidad = 5;
 	protected int anchoRectangulo = 50;
 	
-	public Proyectil(int d, Coordenada c, Rectangle rec) {
+	public Proyectil(int d, Coordenada c, Rectangle rec, String ima) {
 		vida = 1;
 		dmg = d;
 		coord = c;
-		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/projectile.png"));
+		ImageIcon img = new ImageIcon(getClass().getResource(ima));
 		miSprite = new Sprite(img);
 		miRectangulo = new Rectangle(0,0, anchoRectangulo, (int)rec.getHeight());
 		miRectangulo.setLocation((c.getX()*100) + 50, c.getY()*100);

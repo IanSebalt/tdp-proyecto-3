@@ -10,7 +10,7 @@ public class Portero extends ZombieRobusto{
 
 	public Portero() {
 		vida = 170;
-		velocidad = 4;//Falta ver la velocidad
+		velocidad = 2;//Falta ver la velocidad
 		dmg = 2; //Falta ver el dmg
 		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/portero.gif"));
 		miSprite = new Sprite(img);

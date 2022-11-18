@@ -211,6 +211,8 @@ public class Juego {
 		generarNivel(nivelActual, oleadaActual);
 		miGrilla = new Grilla(6);
 		miVentana.siguienteNivel();
+		lapidasGeneradas = false;
+		lapidas = new Coordenada[3];
 	}
 	
 	/**
@@ -227,7 +229,7 @@ public class Juego {
 		Coordenada coord = new Coordenada(x,y);
 		if(miGrilla.getPlanta(coord) == null) {
 			switch(c) {
-				case 1 : 
+				case 1 : 					
 					retornar = fabricaPlan.getPlantaGeneradora(coord);
 					break;
 				case 2 :
@@ -246,10 +248,12 @@ public class Juego {
 				retornar = null;
 			}
 			*/
-			
-			retornar.getRectangulo().setLocation(x*100, y*100);
-			miGrilla.setPlanta(retornar, coord);
-			
+			if(puntosSoles<retornar.getCosto())
+				retornar = null;
+			else {
+				retornar.getRectangulo().setLocation(x*100, y*100);
+				miGrilla.setPlanta(retornar, coord);
+			}
 		}
 		return retornar;
 	}
@@ -507,5 +511,13 @@ public class Juego {
 		controlJuego = new Control(this);
 		Thread hiloJuego = new Thread(controlJuego);
 		hiloJuego.start();
+	}
+	
+	/**
+	 * Método que retorna el arreglo de lápidas.
+	 * @return el arreglo de lapidas.
+	 */
+	public Coordenada [] getLapidas() {
+		return lapidas;
 	}
 }

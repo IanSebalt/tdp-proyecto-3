@@ -11,7 +11,7 @@ public class Lector extends ZombieEspecial{
 		
 		public Lector() {
 			vida = 100;
-			velocidad = 5;//falta ver velocidad
+			velocidad = 2;//falta ver velocidad
 			dmg = 2; //Ver dmg de zombie;
 			diario = true;
 			ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/zombie_lector.gif"));
@@ -21,7 +21,7 @@ public class Lector extends ZombieEspecial{
 		}
 		
 		public void visit(Proyectil p) {
-			p.recibirDmg(1);
+			p.recibirDmg(1);			
 			recibirDmg(p.obtenerDmg());
 			if(vida<= 0) {
 				morir();

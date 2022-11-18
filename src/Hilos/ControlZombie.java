@@ -26,14 +26,14 @@ public class ControlZombie extends Control{
 			try {
 				miJuego.moverZombies();
 				if(inicioOleada) {
-					Thread.sleep(3000);
+					Thread.sleep(20000);
 				}
 				else
 					Thread.sleep(50);
 				if( miJuego.cantidadZombiesParaGenerarEnOleada() > 0 ) {
-					spawn += 100;
-					if(spawn == 800 ) {
-						inicioOleada = false;
+					spawn += 50;
+					inicioOleada = false;
+					if(spawn == 800 ) {						
 						miJuego.generarOleada(1);
 						spawn = 0;
 					}
