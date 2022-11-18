@@ -16,12 +16,14 @@ public class ManejoNivel {
 	public void generarArchivoNivel() {
 		try {
 			OutputStream archivo = new FileOutputStream("Niveles.properties");
-			prop.setProperty("OleadasNivel1", "5");
+			prop.setProperty("OleadasNivel1", "1"); //Cambiar a 5 despues de sacar coment
 			prop.setProperty("Nivel1Soles", "100");
 			prop.setProperty("Nivel1_Oleada1ZombieBasico", "5");
 			prop.setProperty("Nivel1_Oleada1ZombieRobusto", "0");
 			prop.setProperty("Nivel1_Oleada1ZombieEspecial", "0");
 			
+			
+			/*
 			prop.setProperty("Nivel1_Oleada2ZombieBasico", "5");
 			prop.setProperty("Nivel1_Oleada2ZombieRobusto", "2");
 			prop.setProperty("Nivel1_Oleada2ZombieEspecial", "2");
@@ -37,6 +39,8 @@ public class ManejoNivel {
 			prop.setProperty("Nivel1_Oleada5ZombieBasico", "25");
 			prop.setProperty("Nivel1_Oleada5ZombieRobusto", "10");
 			prop.setProperty("Nivel1_Oleada5ZombieEspecial", "10");
+			
+			*/
 			
 			prop.setProperty("OleadasNivel2", "7");
 			prop.setProperty("Nivel2Soles", "150");

@@ -44,6 +44,14 @@ public class Juego {
 	
 	protected Coordenada lapidas [];
 	
+	protected Control controlJuego;
+	
+	protected Control controlZombie;
+	
+	protected Control controlProyectil;
+	
+	protected Control controlPlanta;
+	
 	
 	/**
 	 * Constructor privado para el uso del patrón singleton, en donde recibe una ventana
@@ -157,24 +165,40 @@ public class Juego {
 		}else{ //Es la ultima oleada
 			if( hayZombiesEnGrilla() == false ) {
 				if( nivelActual < 2 ) {
-					//miVentana.finNivel();
-					siguienteNivel(); //Este metodo lo llamaria miVentana si clickean en seguiente nivel;
+					boolean resultadoVentana = miVentana.pedirVolver();
+					if( resultadoVentana == false ) { //Quiere seguir de nivel
+						siguienteNivel();
+					} else { //Quiere volver al menu
+						finJuego();
+					}
 				}else { //Es el ultimo nivel
-					//miVentana.finJuego();
+					finJuego();
 				}
 				
 			}
 		}
 	}
 	
+	
+	
+	public void finJuego() {
+		miVentana.terminarPartida();
+		controlJuego.finish();
+		controlZombie.finish();
+		controlPlanta.finish();
+		controlProyectil.finish();
+	}
+	
 	/**
 	 * Método para avanzar al siguiente nivel iniciando desde la primera oleada y llamando al metodo generarNivel para
 	 * volver a cargar los zombies a generar.
 	 */
-	public void siguienteNivel() {
+	public synchronized void siguienteNivel() {
 		nivelActual++;
 		oleadaActual = 1;
 		generarNivel(nivelActual, oleadaActual);
+		miGrilla = new Grilla(6);
+		miVentana.siguienteNivel();
 	}
 	
 	/**
@@ -192,7 +216,7 @@ public class Juego {
 		if(miGrilla.getPlanta(coord) == null) {
 			switch(c) {
 				case 1 : 
-					retornar = fabricaPlan.getPlantaGeneradora(coord);	
+					retornar = fabricaPlan.getPlantaGeneradora(coord);
 					break;
 				case 2 :
 					retornar = fabricaPlan.getPlantaRobusta(coord);
@@ -201,10 +225,31 @@ public class Juego {
 					retornar = fabricaPlan.getPlantaDisparadora(coord);
 					break;
 			}
+			
+			/* Descomentar si se quiere usar la funcionalidad de comprar plantas solo si se tiene soles necesarios
+			if( puedoComprar(retornar.getCosto()) ) {
+				retornar.getRectangulo().setLocation(x*100, y*100);
+				miGrilla.setPlanta(retornar, coord);
+			}else { //Si no tengo soles para comprar la planta retorno null
+				retornar = null;
+			}
+			*/
+			
 			retornar.getRectangulo().setLocation(x*100, y*100);
 			miGrilla.setPlanta(retornar, coord);
+			
 		}
 		return retornar;
+	}
+	
+	
+	public boolean puedoComprar( int costoPlanta ) {
+		boolean toReturn = false;
+		if(puntosSoles >= costoPlanta) {
+			toReturn = true;
+			puntosSoles =puntosSoles - costoPlanta;
+		} 
+		return toReturn;
 	}
 	
 	/**
@@ -423,16 +468,16 @@ public class Juego {
 		oleadaActual = 1;
 		generarNivel(nivelActual, oleadaActual);
 		miGrilla = new Grilla(6);
-		ControlZombie cz = new ControlZombie(this);
-		Thread hiloZombie = new Thread(cz);
+		controlZombie = new ControlZombie(this);
+		Thread hiloZombie = new Thread(controlZombie);
 		hiloZombie.start();
-		ControlPlanta cPlanta = new ControlPlanta(this);
-		Thread hiloPlanta = new Thread(cPlanta);
+		controlPlanta = new ControlPlanta(this);
+		Thread hiloPlanta = new Thread(controlPlanta);
 		hiloPlanta.start();
-		ControlProyectil cProyectil = new ControlProyectil(this);
-		Thread hiloProyectil = new Thread(cProyectil);
+		controlProyectil = new ControlProyectil(this);
+		Thread hiloProyectil = new Thread(controlProyectil);
 		hiloProyectil.start();
-		Control controlJuego = new Control(this);
+		controlJuego = new Control(this);
 		Thread hiloJuego = new Thread(controlJuego);
 		hiloJuego.start();
 	}

@@ -14,6 +14,10 @@ public abstract class Planta extends Entidad{
 		return vida;
 	}
 	
+	public int getCosto() {
+		return costo;
+	}	
+	
 	public void morir() {
 		Juego j = Juego.obtenerInstancia(null);
 		j.matarPlanta(this);

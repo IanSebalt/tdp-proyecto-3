@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import Entidades.*;
+import Juego.Juego;
 
 public class Grilla {
 	
@@ -80,6 +81,11 @@ public class Grilla {
 				Planta ultimaPlanta = getUltimaPlanta(i);
 				Proyectil ultimoProyectil = null;
 				Zombie zom = it.next();
+				
+				if( zom.getRectangulo().getX() < 0 ) {
+					Juego miJuego = Juego.obtenerInstancia(null);
+					miJuego.finJuego();
+				}
 				
 				if(!matriz[i].getFilaProyectil().isEmpty()) {
 					ultimoProyectil = matriz[i].getFilaProyectil().getLast();

@@ -79,7 +79,6 @@ public class Ventana {
 		
 		panelMenu = new JPanel();
 		panelMenu.setBounds(0, 0, 1264, 985);
-		panelMain.add(panelMenu);
 		panelMenu.setLayout(null);
 		
 		abrirMenu();
@@ -192,11 +191,18 @@ public class Ventana {
 		ImageIcon back = new ImageIcon(getClass().getResource("/imagenes/background.png"));
 		background.setIcon(back);
 		panelMenu.add(background);
+		panelMain.add(panelMenu);
+		panelMain.repaint();
 	}
 	
 	public void terminarPartida() {
 		panelMain.removeAll();
 		abrirMenu();
+	}
+	
+	public void siguienteNivel() {
+		//Resetear el tablero para que cuando la persona pase de nivel no vea las plantas que antes tenia sobre
+		// la grilla
 	}
 	
 	private void funcionJugar() {
