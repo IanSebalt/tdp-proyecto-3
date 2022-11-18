@@ -16,6 +16,11 @@ import Hilos.ControlZombie;
 
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Clase Juego para el manejo general del mismo y responsable de la generación del juego y 
+ * la comunicación entre las distintas clases.
+ *
+ */
 public class Juego {
 	
 	private ModoDeJuego miModo;
@@ -133,6 +138,10 @@ public class Juego {
 				
 	}
 	
+	/**
+	 * Método que retorna el estado del modo de juego.
+	 * @return el modo de juego.
+	 */
 	public ModoDeJuego getModo() {
 		return miModo;
 	}
@@ -164,7 +173,7 @@ public class Juego {
 			miVentana.mostrarCambioOleada();
 		}else{ //Es la ultima oleada
 			if( hayZombiesEnGrilla() == false ) {
-				if( nivelActual < 2 ) {
+				if( nivelActual < 5 ) {
 					boolean resultadoVentana = miVentana.pedirVolver();
 					if( resultadoVentana == false ) { //Quiere seguir de nivel
 						siguienteNivel();
@@ -180,7 +189,10 @@ public class Juego {
 	}
 	
 	
-	
+	/**
+	 * Método que detiene todos los hilos iniciados para el comienzo del juego y termina la partida
+	 * mandandole el mensaje a la ventana.
+	 */
 	public void finJuego() {
 		miVentana.terminarPartida();
 		controlJuego.finish();
@@ -242,7 +254,11 @@ public class Juego {
 		return retornar;
 	}
 	
-	
+	/**
+	 * Método que retorna verdadero si hay la cantidad necesaria de soles para comprar una planta, falso en caso contrario
+	 * @param costoPlanta - coste de la planta a comprar.
+	 * @return verdadero si se puede comprar la planta, falso caso contrario.
+	 */
 	public boolean puedoComprar( int costoPlanta ) {
 		boolean toReturn = false;
 		if(puntosSoles >= costoPlanta) {
@@ -252,6 +268,10 @@ public class Juego {
 		return toReturn;
 	}
 	
+	/**
+	 * Método que retorna la cantidad de soles generados.
+	 * @return cantida de soles.
+	 */
 	public int getSoles() {
 		return puntosSoles;
 	}
@@ -308,6 +328,9 @@ public class Juego {
 	/**
 	 * Método que genera la oleada de zombies de forma aleatoria en donde hay un 50% de generar zombies basicos y para el 
 	 * resto hay un 25% de que se generen.
+	 * El entero recibido por parámetro define como se generan las oleadas siendo el valor 1 para la generación normal de los zombies
+	 * en el caso de que el entero sea 2 se generarán zombies encima de las lápidas, esta opción solamente se habilita para el modo noche.
+	 * @param n - forma de generar zombies.
 	 */
 	public void generarOleada(int n) {
 		int num = ThreadLocalRandom.current().nextInt(1, 5);
@@ -370,7 +393,7 @@ public class Juego {
 	  * @param p - planta a eliminar.
 	  */
 	public void matarPlanta(Planta p) {
-		miGrilla.matarPlanta(p.getCoordenada());
+		miGrilla.matarPlanta(p);
 		miVentana.eliminarPlanta(p);
 	}
 	
