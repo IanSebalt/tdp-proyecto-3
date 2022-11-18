@@ -21,6 +21,6 @@ public class Cactus extends PlantaRobusta{
 	}
 	
 	public void actuar() {
-		//Falta el actuar
+		//Hacer metodo daño.		
 	}	
 }

@@ -111,6 +111,7 @@ public class Ventana {
 			public void mouseClicked(MouseEvent e) {
 				Juego miJuego = Juego.obtenerInstancia(null);
 				miJuego.sumarSoles(25);
+				actualizarSoles();
 				panelGhost.remove(sol);
 			}
 		});
@@ -253,6 +254,7 @@ public class Ventana {
 			panelMain.revalidate();
 		}
 		j.empezarJuego();
+		actualizarSoles();
 	}
 	
 	private void generarTablero() {
@@ -325,14 +327,14 @@ public class Ventana {
 		panelJuego.add(botonMusica);
 	}
 	
-	public void actualizarSoles() {
+	public void actualizarSoles() {		
 		soles.setText("Soles: "+Juego.obtenerInstancia(this).getSoles());
 	}
 	
 	private void clickEnTil(JLabel j) {
 		if(plantaClick != 0) {
 			Planta plantaE = Juego.obtenerInstancia(null).generarPlanta(plantaClick, j.getX() / ancho, j.getY() / largo);
-			if(plantaE != null) {
+			if(plantaE != null && plantaE.getCosto()<= Juego.obtenerInstancia(this).getSoles()) {
 				Sprite planta = plantaE.getSprite();
 				planta.setBounds(0, 0, ancho, largo	);
 				ImageIcon img = planta.getImg();
@@ -341,6 +343,8 @@ public class Ventana {
 				j.repaint();
 				panelTablero.repaint();
 				plantaClick = 0;
+				Juego.obtenerInstancia(this).restarSoles(plantaE.getCosto());
+				actualizarSoles();
 			}
 		}
 	}
