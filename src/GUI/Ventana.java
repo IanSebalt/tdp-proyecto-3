@@ -35,7 +35,6 @@ public class Ventana {
 
 	private static final int ancho = 100;
 	private static final int largo = 100;
-	private static final int xInicial = 1000;
 	private static final int cols = 9;
 	private static final int filas = 6;
 
