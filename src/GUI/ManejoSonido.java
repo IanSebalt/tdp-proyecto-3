@@ -20,6 +20,7 @@ public class ManejoSonido {
 				clip = AudioSystem.getClip();
 				clip.open(audioInput);
 				clip.start();
+				clip.loop(Clip.LOOP_CONTINUOUSLY);
 				estaEncendida = true;
 			}
 		} catch(Exception e) {
@@ -29,6 +30,14 @@ public class ManejoSonido {
 	
 	public void musicaDia() {
 		musica("salio.wav");
+	}
+	
+	public void musicaNoche() {
+		musica("cayo.wav");
+	}
+	
+	public void parar() {
+		clip.stop();
 	}
 	
 	public void pararIniciarMusica() {

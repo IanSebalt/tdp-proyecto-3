@@ -198,6 +198,7 @@ public class Ventana {
 	
 	public void terminarPartida() {
 		panelMain.removeAll();
+		miSonido.parar();
 		abrirMenu();
 	}
 	
@@ -235,7 +236,7 @@ public class Ventana {
 		}else {
 			j.setModo(2);
 			miSonido = new ManejoSonido();
-			miSonido.musicaDia();
+			miSonido.musicaNoche();
 			panelMain.remove(panelMenu);
 			panelJuego = new JPanel();
 			panelJuego.setBounds(0, 0, 1264, 985);
