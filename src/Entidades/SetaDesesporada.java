@@ -13,7 +13,7 @@ public class SetaDesesporada extends PlantaDisparadora {
 		segundos = 0;//Setear segundos;
 		dmg = 15;//Setear dmg;
 		vida = 60;
-		costo = 0;
+		costo = 25;
 		coord = c;
 		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/setadesesporada.gif"));
 		miSprite = new Sprite(img);
