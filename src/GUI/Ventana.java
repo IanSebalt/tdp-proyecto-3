@@ -29,6 +29,7 @@ public class Ventana {
 	private JPanel panelMenu;
 	private JPanel panelJuego;
 	private JPanel panelTablero;
+	private JLabel soles;
 	private ManejoSonido miSonido;
 	private int plantaClick;
 
@@ -201,8 +202,11 @@ public class Ventana {
 	}
 	
 	public void siguienteNivel() {
-		//Resetear el tablero para que cuando la persona pase de nivel no vea las plantas que antes tenia sobre
-		// la grilla
+		panelGhost.removeAll();
+		panelJuego.remove(panelTablero);
+		panelTablero.removeAll();
+		generarTablero();
+		panelJuego.repaint();
 	}
 	
 	private void funcionJugar() {
@@ -305,6 +309,11 @@ public class Ventana {
 			});			
 			panelJuego.add(tienda);
 		}
+		soles = new JLabel();
+		soles.setText("Soles: "+Juego.obtenerInstancia(this).getSoles());
+		soles.setBounds(xIni + 300, 625, 100, 30);
+		soles.setFont(new Font("Unispace", Font.PLAIN, 11));
+		panelJuego.add(soles);
 		JButton botonMusica = new JButton();
 		botonMusica.setText("Musica");
 		botonMusica.setBounds(xIni + 800, 625, 80, 60);
@@ -314,6 +323,10 @@ public class Ventana {
 			}
 		});
 		panelJuego.add(botonMusica);
+	}
+	
+	public void actualizarSoles() {
+		soles.setText("Soles: "+Juego.obtenerInstancia(this).getSoles());
 	}
 	
 	private void clickEnTil(JLabel j) {

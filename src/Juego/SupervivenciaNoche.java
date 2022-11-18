@@ -71,7 +71,7 @@ public class SupervivenciaNoche extends ModoDeJuego{
 	}
 
 	public String[] getCesped() {
-		String[] retornar =  {"/imagenes/grasstile.png", "/imagenes/grasstile-hovered.png"};
+		String[] retornar =  {"/imagenes/night-grass.png", "/imagenes/night-grass-hovered.png"};
 		return retornar;
 	}
 

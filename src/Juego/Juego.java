@@ -252,6 +252,10 @@ public class Juego {
 		return toReturn;
 	}
 	
+	public int getSoles() {
+		return puntosSoles;
+	}
+	
 	/**
 	 * Método que genera un zombie en una fila de forma aleatoria. El tipo de zombie es definido por el entero recibido por parámetro.
 	 * @param c - tipo de zombie a generar.
