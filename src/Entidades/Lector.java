@@ -11,16 +11,16 @@ public class Lector extends ZombieEspecial{
 		
 		public Lector() {
 			vida = 100;
-			velocidad = 2;//falta ver velocidad
+			velocidad = 3;//falta ver velocidad
 			dmg = 2; //Ver dmg de zombie;
 			diario = true;
 			ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/zombie_lector.gif"));
 			miSprite = new Sprite(img);
 			miRectangulo = new Rectangle(0,0, anchoRectanguloZombie, altoRectanguloZombie);
-			
+			ralentizado = false;
 		}
 		
-		public void visit(Proyectil p) {
+		public void visit(ProyectilNormal p) {
 			p.recibirDmg(1);			
 			recibirDmg(p.obtenerDmg());
 			if(vida<= 0) {
@@ -30,10 +30,25 @@ public class Lector extends ZombieEspecial{
 			}
 		}	
 		
+		public void visit(ProyectilRalentizador p) {
+			p.recibirDmg(1);
+			recibirDmg(p.obtenerDmg());
+			if(vida <= 0) {
+				morir();
+			} else if(vida <= 80 && diario) {
+				romperDiario();
+			}
+			if(!ralentizado) {
+				ralentizado = true;
+				velocidad *= 1;
+			}
+		}
+		
 		private void romperDiario() {
 			diario = false;
-			velocidad *= 1.5;
-			//Faltaria llamar a animacion
+			velocidad = 3;
+			ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/zombie.gif"));
+			miSprite.setImg(img);
 		}
 
 }

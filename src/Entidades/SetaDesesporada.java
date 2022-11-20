@@ -24,7 +24,7 @@ public class SetaDesesporada extends PlantaDisparadora {
 		segundos += 500;
 		Juego j = Juego.obtenerInstancia(null);
 		if(j.hayZombieFila(coord) && segundos == 1500) {
-			Proyectil p = new Proyectil(dmg, coord, miRectangulo, "/imagenes/espora.png");
+			Proyectil p = new ProyectilRalentizador(dmg, coord, miRectangulo);
 			j.generarProyectil(coord, p);
 		}
 		if(segundos>=1500)

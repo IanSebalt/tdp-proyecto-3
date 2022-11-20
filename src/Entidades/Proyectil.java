@@ -12,25 +12,11 @@ import Juego.Juego;
  * Clase ControlZombie que extiende Control para el manejo del hilo dedicado a la actualización de los Zombies.
  *
  */
-public class Proyectil extends Entidad{
+public abstract class Proyectil extends Entidad{
 	protected int dmg;
 	protected int velocidad = 5;
-	protected int anchoRectangulo = 50;
-	
-	public Proyectil(int d, Coordenada c, Rectangle rec, String ima) {
-		vida = 1;
-		dmg = d;
-		coord = c;
-		ImageIcon img = new ImageIcon(getClass().getResource(ima));
-		miSprite = new Sprite(img);
-		miRectangulo = new Rectangle(0,0, anchoRectangulo, (int)rec.getHeight());
-		miRectangulo.setLocation((c.getX()*100) + 50, c.getY()*100);
-	}
-	
-	public void morir() {
-		Juego j = Juego.obtenerInstancia(null);
-		j.matarProyectil(this);
-	}
+	protected int anchoRectangulo = 50;	
+
 	
 	public void mover() {
 		if(miSprite.getX()>=900)
@@ -39,13 +25,14 @@ public class Proyectil extends Entidad{
 		miRectangulo.setLocation(miSprite.getX() + velocidad, miSprite.getY());
 	}
 	
-	public void accept(VisitorZombie v){
-	 	v.visit(this);
-	 }
+	public void morir() {
+		Juego j = Juego.obtenerInstancia(null);
+		j.matarProyectil(this);
+	}
 	
+	public abstract void accept(VisitorZombie z);
+
 	public int obtenerDmg() {
 		return dmg;
 	}
-	
-	
 }

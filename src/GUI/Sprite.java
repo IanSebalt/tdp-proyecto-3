@@ -16,6 +16,8 @@ public class Sprite extends JLabel{
 	
 	public void setImg(ImageIcon img) {
 		this.img = img;
+		setIcon(img);
+		repaint();
 	}
 	
 	public void mover(int x, int y) {

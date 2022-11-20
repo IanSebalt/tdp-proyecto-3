@@ -24,7 +24,7 @@ public class LanzaGuisantes extends PlantaDisparadora{
 		Juego j = Juego.obtenerInstancia(null);
 		segundos += 500;
 		if(j.hayZombieFila(coord) && segundos == 1500) {
-			Proyectil p = new Proyectil(dmg, coord, miRectangulo, "/imagenes/projectile.png");		
+			Proyectil p = new ProyectilNormal(dmg, coord, miRectangulo);		
 			j.generarProyectil(coord, p);
 		}
 		if(segundos>=1500)

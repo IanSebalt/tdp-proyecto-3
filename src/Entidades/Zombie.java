@@ -7,6 +7,7 @@ public abstract class Zombie extends Entidad implements VisitorZombie{
 	protected int velocidad;
 	protected int anchoRectanguloZombie = 80;
 	protected int altoRectanguloZombie = 100;
+	protected boolean ralentizado;
 	
 	public void mover() {
 		miSprite.mover(miSprite.getX() - velocidad, miSprite.getY());
@@ -22,7 +23,7 @@ public abstract class Zombie extends Entidad implements VisitorZombie{
 		j.matarZombie(this);
 	}
 	
-	public void visit(Proyectil p) {
+	public void visit(ProyectilNormal p) {
 		p.recibirDmg(1);
 		recibirDmg(p.obtenerDmg());
 		if(vida <= 0) {
@@ -30,5 +31,16 @@ public abstract class Zombie extends Entidad implements VisitorZombie{
 		}
 	}
 	
+	public void visit(ProyectilRalentizador p) {
+		p.recibirDmg(1);
+		recibirDmg(p.obtenerDmg());
+		if(vida <= 0) {
+			morir();
+		}
+		if(!ralentizado) {
+			ralentizado = true;
+			velocidad = 1;
+		}
+	}
 
 }

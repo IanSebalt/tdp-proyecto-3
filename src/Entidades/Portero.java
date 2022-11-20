@@ -15,6 +15,7 @@ public class Portero extends ZombieRobusto{
 		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/portero.gif"));
 		miSprite = new Sprite(img);
 		miRectangulo = new Rectangle(0,0, anchoRectanguloZombie, altoRectanguloZombie);
+		ralentizado = false;
 	}
 	
 }

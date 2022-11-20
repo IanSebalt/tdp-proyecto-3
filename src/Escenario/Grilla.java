@@ -139,7 +139,7 @@ public class Grilla {
 				}		
 				if(ultimoProyectil != null) {
 					if(zom.getRectangulo().intersects(ultimoProyectil.getRectangulo())){
-						zom.visit(ultimoProyectil);
+						ultimoProyectil.accept(zom);
 					}
 				}
 				
@@ -147,7 +147,7 @@ public class Grilla {
 					zom.mover();
 				}else {
 					if(zom.getRectangulo().intersects(ultimaPlanta.getRectangulo())) {
-						zom.visit(ultimaPlanta);
+						ultimaPlanta.accept(zom);
 					}else {
 						zom.mover();
 					}
