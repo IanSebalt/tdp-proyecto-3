@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.Timer;
 
 import Entidades.Entidad;
@@ -180,6 +182,11 @@ public class Ventana {
 		JButton btnManual = new JButton("Manual");
 		btnManual.setFont(new Font("Unispace", Font.PLAIN, 11));
 		btnManual.setBounds(375, 334, 89, 23);
+		btnManual.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				abrirManual();
+			}
+		});
 		panelMenu.add(btnManual);
 		
 		JLabel title = new JLabel();
@@ -205,9 +212,10 @@ public class Ventana {
 	
 	public void siguienteNivel() {
 		panelGhost.removeAll();
-		panelJuego.remove(panelTablero);
+		panelJuego.removeAll();
 		panelTablero.removeAll();
 		generarTablero();
+		generarTienda();
 		panelJuego.repaint();
 		actualizarSoles();
 	}
@@ -297,6 +305,40 @@ public class Ventana {
 		panelMain.add(panelTablero);
 	}
 	
+	private void abrirManual() {
+		panelMain.removeAll();
+		panelMain.repaint();
+		JPanel panelManual = new JPanel();
+		panelManual.setBounds(0, 0, 1264, 985);
+		JTextArea t = new JTextArea();
+		t.setBackground(null);
+		t.setBounds(0, 0, 1264, 500);
+		t.setText("Bienvenido al manual del juego:"
+				+ "\n\n El juego posee dos modos de juego. Cada modo de juego posee dos niveles. En cada modo de juego, a partir del segundo nivel, se pone a disposción\n una nueva planta, para un "
+				+ "total de tres."
+				+ "\n\n En el modo día caen soles del cielo y hay disponibles las siguientes plantas:"
+				+ "\n\n Planta Lanzaguisantes: principal baza de ataque durante el día. Una planta que dispara guisantes hacia los zombies, haciendo un daño moderado."
+				+ "\n Girasol: planta generadora durante el día. Genera soles cada 25 segundos."
+				+ "\n Nuez: principal defensa durante el día. Resiste bien las mordidas de los zombies, pero no puede responder ante ellas. Se desbloquea en el nivel dos."
+				+ "\n\n En el modo noche no caen soles del cielo, y además hay lápidas de las cuales salen zombies luego de un rato. Las plantas disponibles son:"
+				+ "\n\n Seta Desesporada: principal baza de ataque durante la noche. Una seta que dispara esporas hacia los zombies, ralentizando su caminar."
+				+ "\n Seta Solar: planta generadora durante el día. Genera soles cada 25 segundos cuando es pequeña, y cada 20 segundos cuando crece. Crece al pasar\n 75 segundos."
+				+ "\n Cactus: principal defensa durante la noche. Resiste bien las mordidas de los zombies y además dispara poderosos proyectiles a los zombies,\n pero con una cadencia lenta. "
+				+ "\n Se desbloquea en el nivel dos.");
+		JButton btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Unispace", Font.PLAIN, 11));
+		btnVolver.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				panelMain.removeAll();
+				abrirMenu();
+			}
+		});
+		btnVolver.setBounds(375, 400, 89, 23);
+		panelManual.add(btnVolver); 
+		panelManual.add(t);
+		panelMain.add(panelManual);
+	}
+	
 	private void generarTienda() {
 		int xIni = 0;
 		int yIni = 600;
@@ -310,8 +352,12 @@ public class Ventana {
 				public void mouseClicked(MouseEvent e) {
 					plantaClick = x + 1;
 				}
-			});			
-			panelJuego.add(tienda);
+				public void mousePressed(MouseEvent e) {
+					plantaClick = x + 1;
+				}
+			});
+			if( x != 1 || Juego.obtenerInstancia(this).getNivel() >= 2)
+				panelJuego.add(tienda);
 		}
 		soles = new JLabel();
 		soles.setText("Soles: "+Juego.obtenerInstancia(this).getSoles());

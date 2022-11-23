@@ -490,6 +490,10 @@ public class Juego {
 		return lapidasGeneradas;
 	}
 	
+	public int getNivel() {
+		return nivelActual;
+	}
+	
 	/**
 	 * Método que inicia el juego en el primer nivel y primera oleada y crea los hilos para manejar cada entidad y los inicia.
 	 * Tambien se crea la grilla con una cantidad de 6 filas.
