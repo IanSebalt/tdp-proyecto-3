@@ -208,6 +208,7 @@ public class Ventana {
 		panelMain.removeAll();
 		miSonido.parar();
 		abrirMenu();
+		JOptionPane.showMessageDialog(frame, "Terminó la partida.");
 	}
 	
 	public void siguienteNivel() {
