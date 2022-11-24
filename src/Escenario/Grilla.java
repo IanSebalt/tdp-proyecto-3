@@ -183,12 +183,8 @@ public class Grilla {
 	
 	public synchronized boolean hayZombies() {
 		boolean toReturn = false;
-		for(int i = 0; i<matriz.length; i++) {
-			for(Zombie z : matriz[i].getFilaZombie()) {
-				if(z != null) {
-					toReturn = true;
-				}
-			}
+		for(int i = 0; i<matriz.length && !toReturn; i++) {
+			toReturn = matriz[i].getFilaZombie().size()>0;		
 		}
 		return toReturn;
 	}

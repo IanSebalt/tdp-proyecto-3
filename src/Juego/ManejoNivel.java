@@ -46,7 +46,7 @@ public class ManejoNivel {
 			
 			//Se crea clave valor para el nivel 2.		
 			prop.setProperty("OleadasNivel2", "4");
-			prop.setProperty("Nivel2Soles", "100");
+			prop.setProperty("Nivel2Soles", "150");
 			prop.setProperty("Nivel2_Oleada1ZombieBasico", "6");
 			prop.setProperty("Nivel2_Oleada1ZombieRobusto", "0");
 			prop.setProperty("Nivel2_Oleada1ZombieEspecial", "0");
@@ -65,7 +65,7 @@ public class ManejoNivel {
 			
 			//Se crea clave valor para el nivel 3
 			prop.setProperty("OleadasNivel3", "5");
-			prop.setProperty("Nivel3Soles", "100");
+			prop.setProperty("Nivel3Soles", "150");
 			
 			prop.setProperty("Nivel3_Oleada1ZombieBasico", "7");
 			prop.setProperty("Nivel3_Oleada1ZombieRobusto", "0");
@@ -89,7 +89,7 @@ public class ManejoNivel {
 			
 			//Se crea clave valor para el nivel 4.
 			prop.setProperty("OleadasNivel4", "6");
-			prop.setProperty("Nivel4Soles", "125");
+			prop.setProperty("Nivel4Soles", "175");
 			
 			prop.setProperty("Nivel4_Oleada1ZombieBasico", "8");
 			prop.setProperty("Nivel4_Oleada1ZombieRobusto", "0");
@@ -117,7 +117,7 @@ public class ManejoNivel {
 			
 			//Se crea clave valor para el nivel 5.
 			prop.setProperty("OleadasNivel5", "7");
-			prop.setProperty("Nivel5Soles", "150");
+			prop.setProperty("Nivel5Soles", "200");
 			
 			prop.setProperty("Nivel5_Oleada1ZombieBasico", "10");
 			prop.setProperty("Nivel5_Oleada1ZombieRobusto", "0");
