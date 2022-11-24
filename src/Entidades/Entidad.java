@@ -4,13 +4,11 @@ import java.awt.Rectangle;
 
 import Escenario.Coordenada;
 import GUI.Sprite;
-import Juego.Juego;
 
 public abstract class Entidad {
 	protected Sprite miSprite;
 	protected int vida;
 	protected Coordenada coord;
-	protected Juego miJuego;
 	protected Rectangle miRectangulo;
 	
 	public abstract void morir();

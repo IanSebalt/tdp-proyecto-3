@@ -36,6 +36,9 @@ public class Control implements Runnable{
 		}
 	}
 	
+	/**
+	 * Método que detiene el ciclo del hilo.
+	 */
 	public void finish() {
 		continuar = false;
 	}

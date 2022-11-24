@@ -1,11 +1,5 @@
 package Entidades;
 
-import java.awt.Rectangle;
-
-import javax.swing.ImageIcon;
-
-import Escenario.Coordenada;
-import GUI.Sprite;
 import Juego.Juego;
 
 /**
@@ -14,8 +8,8 @@ import Juego.Juego;
  */
 public abstract class Proyectil extends Entidad{
 	protected int dmg;
-	protected int velocidad = 5;
-	protected int anchoRectangulo = 50;	
+	protected int velocidad = 4;
+	protected int anchoRectangulo = 60;	
 
 	
 	public void mover() {

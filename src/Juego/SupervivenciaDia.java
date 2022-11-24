@@ -43,11 +43,6 @@ public class SupervivenciaDia extends ModoDeJuego{
 		cronometro += seg;
 	}
 
-	
-	public String getFondo() {
-		return null;
-	}
-	
 	public String[] getCesped() {
 		String[] retornar =  {"/imagenes/grasstile.png", "/imagenes/grasstile-hovered.png"};
 		return retornar;

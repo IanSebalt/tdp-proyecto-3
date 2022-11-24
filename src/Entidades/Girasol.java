@@ -13,18 +13,17 @@ public class Girasol extends PlantaGeneradora{
 	
 	public Girasol(Coordenada c) {
 		segundos = 0;//Setear segundos;
-		soles = 1;//Setear soles;
 		vida = 100;
 		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/sunflower.gif"));
 		miSprite = new Sprite(img);
 		costo = 50;
 		coord = c;
-		miRectangulo = new Rectangle(0,0,100,100);
+		miRectangulo = new Rectangle(0,0,80,100);
 	}
 	
 	public void actuar() {
 		segundos += 500;
-		if(segundos==2500) {
+		if(segundos==20000) {
 			Juego j = Juego.obtenerInstancia(null);
 			j.generarSol( coord );
 			segundos = 0;

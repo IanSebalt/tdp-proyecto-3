@@ -8,7 +8,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.Timer;
 
 import Entidades.Entidad;
@@ -319,7 +318,7 @@ public class Ventana {
 				+ "total de tres."
 				+ "\n\n En el modo día caen soles del cielo y hay disponibles las siguientes plantas:"
 				+ "\n\n Planta Lanzaguisantes: principal baza de ataque durante el día. Una planta que dispara guisantes hacia los zombies, haciendo un daño moderado."
-				+ "\n Girasol: planta generadora durante el día. Genera soles cada 25 segundos."
+				+ "\n Girasol: planta generadora durante el día. Genera soles cada 20 segundos."
 				+ "\n Nuez: principal defensa durante el día. Resiste bien las mordidas de los zombies, pero no puede responder ante ellas. Se desbloquea en el nivel dos."
 				+ "\n\n En el modo noche no caen soles del cielo, y además hay lápidas de las cuales salen zombies luego de un rato. Las plantas disponibles son:"
 				+ "\n\n Seta Desesporada: principal baza de ataque durante la noche. Una seta que dispara esporas hacia los zombies, ralentizando su caminar."

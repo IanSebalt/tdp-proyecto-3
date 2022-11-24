@@ -56,19 +56,14 @@ public class SupervivenciaNoche extends ModoDeJuego{
 				}
 			cronometro = 0;
 		}
-		if(miJuego.seGeneraronZombiesEnLapida() == false && miJuego.cantidadZombiesParaGenerarEnOleada() > 0 && cronometro == 20000) {
+		if(miJuego.seGeneraronZombiesEnLapida() == false && miJuego.cantidadZombiesParaGenerarEnOleada() > 0 && cronometro == 25000) {
 			miJuego.generarOleada(2);
 			cronometro = 0;
 		}
-		if(cronometro>=20000 || miJuego.seGeneraronZombiesEnLapida() == true)
+		if(cronometro>=25000 || miJuego.seGeneraronZombiesEnLapida() == true)
 			cronometro = 0;
 		if(miJuego.getLapidas()[0]==null && miJuego.seGeneraronZombiesEnLapida() == false)
 			cantLapidas = 0;
-	}
-
-	public String getFondo() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	public String[] getCesped() {

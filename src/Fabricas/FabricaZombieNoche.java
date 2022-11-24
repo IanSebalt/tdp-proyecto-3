@@ -1,7 +1,7 @@
 package Fabricas;
 
 
-import Entidades.Comun;
+import Entidades.Abanderado;
 import Entidades.Lector;
 import Entidades.Portero;
 import Entidades.ZombieBasico;
@@ -10,7 +10,7 @@ import Entidades.ZombieRobusto;
 
 public class FabricaZombieNoche implements FabricaZombie{
 	public ZombieBasico getZombieBasico() {
-		return new Comun();
+		return new Abanderado();
 	}
 	public ZombieEspecial getZombieEspecial() {
 		return new Lector();

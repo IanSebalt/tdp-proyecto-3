@@ -22,12 +22,6 @@ public abstract class ModoDeJuego {
 	public abstract void accionModo(int seg);	
 	
 	/**
-	 * Método que retorna la imágen del fondo del modo de juego.
-	 * @return imagen del fondo del modo de juego.
-	 */
-	public abstract String getFondo();
-	
-	/**
 	 * Método que retorna un arreglo con las imagenes del cesped del modo de juego.
 	 * @return arreglo con las imagenes del cesped.
 	 */

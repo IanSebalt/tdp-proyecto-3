@@ -30,8 +30,8 @@ public class ManejoNivel {
 			OutputStream archivo = new FileOutputStream("Niveles.properties");
 			
 			//Se crea clave valor para el nivel 1.
-			prop.setProperty("OleadasNivel1", "1"); //Cambiar a 5 despues de sacar coment
-			prop.setProperty("Nivel1Soles", "100");
+			prop.setProperty("OleadasNivel1", "3"); //Cambiar a 5 despues de sacar coment
+			prop.setProperty("Nivel1Soles", "150");
 			prop.setProperty("Nivel1_Oleada1ZombieBasico", "5");
 			prop.setProperty("Nivel1_Oleada1ZombieRobusto", "0");
 			prop.setProperty("Nivel1_Oleada1ZombieEspecial", "0");			

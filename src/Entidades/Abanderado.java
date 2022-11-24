@@ -10,7 +10,7 @@ public class Abanderado extends ZombieBasico{
 	public Abanderado() {
 		vida = 120;
 		velocidad = 2;
-		dmg = 10;
+		dmg = 1;
 		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/abanderado.gif"));
 		miSprite = new Sprite(img);
 		miRectangulo = new Rectangle(0,0, anchoRectanguloZombie, altoRectanguloZombie);

@@ -29,7 +29,7 @@ public class Juego {
 	
 	protected int zombiesBasicos, zombiesRobustos, zombiesEspeciales;
 	
-	boolean lapidasGeneradas;
+	protected boolean lapidasGeneradas;
 	
 	protected int oleadaActual;
 	
@@ -238,22 +238,14 @@ public class Juego {
 				case 3 :
 					retornar = fabricaPlan.getPlantaDisparadora(coord);
 					break;
-			}
-			
-			/* Descomentar si se quiere usar la funcionalidad de comprar plantas solo si se tiene soles necesarios
+			}			
 			if( puedoComprar(retornar.getCosto()) ) {
 				retornar.getRectangulo().setLocation(x*100, y*100);
 				miGrilla.setPlanta(retornar, coord);
 			}else { //Si no tengo soles para comprar la planta retorno null
 				retornar = null;
 			}
-			*/
-			if(puntosSoles<retornar.getCosto())
-				retornar = null;
-			else {
-				retornar.getRectangulo().setLocation(x*100, y*100);
-				miGrilla.setPlanta(retornar, coord);
-			}
+			
 		}
 		return retornar;
 	}
@@ -267,7 +259,6 @@ public class Juego {
 		boolean toReturn = false;
 		if(puntosSoles >= costoPlanta) {
 			toReturn = true;
-			puntosSoles =puntosSoles - costoPlanta;
 		} 
 		return toReturn;
 	}
@@ -490,6 +481,10 @@ public class Juego {
 		return lapidasGeneradas;
 	}
 	
+	/**
+	 * Método que retorna el nivel actual que se está jugando.
+	 * @return nivel actual.
+	 */
 	public int getNivel() {
 		return nivelActual;
 	}

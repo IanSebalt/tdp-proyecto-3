@@ -26,14 +26,14 @@ public class ControlZombie extends Control{
 			try {
 				miJuego.moverZombies();
 				if(inicioOleada) {
-					Thread.sleep(20000);
+					Thread.sleep(25000);
 				}
 				else
 					Thread.sleep(50);
 				if( miJuego.cantidadZombiesParaGenerarEnOleada() > 0 ) {
 					spawn += 50;
 					inicioOleada = false;
-					if(spawn == 800 ) {						
+					if(spawn == 4000 ) {						
 						miJuego.generarOleada(1);
 						spawn = 0;
 					}
@@ -48,7 +48,7 @@ public class ControlZombie extends Control{
 					 *  Pero quiero cambiar de nivel solo cuando no haya mas zombies en pantalla
 					 */
 				}
-				if(spawn>800)
+				if(spawn>4000)
 					spawn = 0;
 				
 			} catch (InterruptedException e) {

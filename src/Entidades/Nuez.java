@@ -18,9 +18,9 @@ public class Nuez extends PlantaRobusta {
 		coord = c;
 		miRectangulo = new Rectangle(0,0,100,100);
 	}
-	
+
 	public void actuar() {
-		//No hace nada
-	}
+		//No realiza ninguna acción.
+	}	
 
 }

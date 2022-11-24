@@ -6,7 +6,6 @@ import javax.swing.ImageIcon;
 
 import Escenario.Coordenada;
 import GUI.Sprite;
-import Juego.Juego;
 
 public class ProyectilNormal  extends Proyectil{
 	public ProyectilNormal(int d, Coordenada c, Rectangle rec) {
