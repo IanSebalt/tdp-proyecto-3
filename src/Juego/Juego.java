@@ -8,6 +8,7 @@ import Entidades.Zombie;
 import Escenario.Grilla;
 import Fabricas.FabricaPlanta;
 import Fabricas.FabricaZombie;
+import GUI.Sprite;
 import GUI.Ventana;
 import Hilos.Control;
 import Hilos.ControlPlanta;
@@ -221,10 +222,11 @@ public class Juego {
 	 * @param c - tipo de planta a generar.
 	 * @param x - posición x en el escenario.
 	 * @param y - posición y en el escenario.
-	 * @return la planta generada.
+	 * @return el sprite de la planta generada.
 	 */
-	public Planta generarPlanta(int c, int x, int y) {
+	public Sprite generarPlanta(int c, int x, int y) {
 		Planta retornar = null;
+		Sprite retornarS = null;
 		FabricaPlanta fabricaPlan = miModo.getFabricaPlanta();
 		Coordenada coord = new Coordenada(x,y);
 		if(miGrilla.getPlanta(coord) == null) {
@@ -242,11 +244,21 @@ public class Juego {
 			if( puedoComprar(retornar.getCosto()) ) {
 				retornar.getRectangulo().setLocation(x*100, y*100);
 				miGrilla.setPlanta(retornar, coord);
+				retornarS = retornar.getSprite();
+				restarSoles(retornar.getCosto());
 			}else { //Si no tengo soles para comprar la planta retorno null
 				retornar = null;
 			}
 			
 		}
+		return retornarS;
+	}
+	
+	public boolean chequearLapida(int x, int y) {
+		boolean retornar = false;
+		Coordenada [] laps = getLapidas();
+		for(int i = 0; i < laps.length && !retornar; i++) 
+			retornar = laps[i].getX() == x && laps[i].getY() == y;
 		return retornar;
 	}
 	

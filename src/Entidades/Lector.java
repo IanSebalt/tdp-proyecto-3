@@ -11,7 +11,7 @@ public class Lector extends ZombieEspecial{
 		
 		public Lector() {
 			vida = 100;
-			velocidad = 3;//falta ver velocidad
+			velocidad = 1;//falta ver velocidad
 			dmg = 2; //Ver dmg de zombie;
 			diario = true;
 			ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/zombie_lector.gif"));

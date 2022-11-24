@@ -243,28 +243,30 @@ public class Ventana {
 			panelMain.add(panelJuego);
 			panelMain.repaint();
 			panelMain.revalidate();
-		}else {
-			j.setModo(2);
-			miSonido = new ManejoSonido();
-			miSonido.musicaNoche();
-			panelMain.remove(panelMenu);
-			panelJuego = new JPanel();
-			panelJuego.setBounds(0, 0, 1264, 985);
-			panelJuego.setLayout(null);
-			panelJuego.setOpaque(false);
-			panelGhost = new JPanel();
-			panelGhost.setLayout(null);
-			panelGhost.setBounds(0, 0, cols * largo, filas * ancho);
-			panelGhost.setOpaque(false);
-			panelMain.add(panelGhost);
-			generarTablero();
-			generarTienda();
-			panelMain.add(panelJuego);
-			panelMain.repaint();
-			panelMain.revalidate();
+			j.empezarJuego();
+			actualizarSoles();
+		}else if (opt == 1){
+				j.setModo(2);
+				miSonido = new ManejoSonido();
+				miSonido.musicaNoche();
+				panelMain.remove(panelMenu);
+				panelJuego = new JPanel();
+				panelJuego.setBounds(0, 0, 1264, 985);
+				panelJuego.setLayout(null);
+				panelJuego.setOpaque(false);
+				panelGhost = new JPanel();
+				panelGhost.setLayout(null);
+				panelGhost.setBounds(0, 0, cols * largo, filas * ancho);
+				panelGhost.setOpaque(false);
+				panelMain.add(panelGhost);
+				generarTablero();
+				generarTienda();
+				panelMain.add(panelJuego);
+				panelMain.repaint();
+				panelMain.revalidate();
+				j.empezarJuego();
+				actualizarSoles();
 		}
-		j.empezarJuego();
-		actualizarSoles();
 	}
 	
 	private void generarTablero() {
@@ -381,17 +383,15 @@ public class Ventana {
 	
 	private void clickEnTil(JLabel j) {
 		if(plantaClick != 0) {
-			Planta plantaE = Juego.obtenerInstancia(null).generarPlanta(plantaClick, j.getX() / ancho, j.getY() / largo);
-			if(plantaE != null && plantaE.getCosto()<= Juego.obtenerInstancia(this).getSoles()) {
-				Sprite planta = plantaE.getSprite();
-				planta.setBounds(0, 0, ancho, largo	);
-				ImageIcon img = planta.getImg();
-				planta.setIcon(img);
-				j.add(planta);
+			Sprite plantaE = Juego.obtenerInstancia(this).generarPlanta(plantaClick, j.getX() / ancho, j.getY() / largo);
+			if(plantaE != null && !Juego.obtenerInstancia(this).chequearLapida(j.getX() / ancho, j.getY() / largo)) {
+				plantaE.setBounds(0, 0, ancho, largo);
+				ImageIcon img = plantaE.getImg();
+				plantaE.setIcon(img);
+				j.add(plantaE);
 				j.repaint();
 				panelTablero.repaint();
 				plantaClick = 0;
-				Juego.obtenerInstancia(this).restarSoles(plantaE.getCosto());
 				actualizarSoles();
 			}
 		}

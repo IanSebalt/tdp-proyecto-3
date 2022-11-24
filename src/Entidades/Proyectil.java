@@ -15,8 +15,10 @@ public abstract class Proyectil extends Entidad{
 	public void mover() {
 		if(miSprite.getX()>=900)
 			morir();
-		miSprite.mover(miSprite.getX() + velocidad, miSprite.getY());
-		miRectangulo.setLocation(miSprite.getX() + velocidad, miSprite.getY());
+		else {
+			miRectangulo.setLocation(miSprite.getX() + velocidad, miSprite.getY());
+			miSprite.mover(miSprite.getX() + velocidad, miSprite.getY());
+		}
 	}
 	
 	public void morir() {

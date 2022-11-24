@@ -13,7 +13,7 @@ public class SetaSolar extends PlantaGeneradora{
 	protected boolean crecio;
 	
 	public SetaSolar(Coordenada c) {
-		segundos = 0;//Setear segundos;
+		segundos = 0;
 		vida = 100;
 		costo = 25;
 		coord = c;

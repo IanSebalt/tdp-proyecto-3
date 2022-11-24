@@ -10,8 +10,8 @@ public abstract class Zombie extends Entidad implements VisitorZombie{
 	protected boolean ralentizado;
 	
 	public void mover() {
-		miSprite.mover(miSprite.getX() - velocidad, miSprite.getY());
 		miRectangulo.setLocation(miSprite.getX() - velocidad, miSprite.getY());
+		miSprite.mover(miSprite.getX() - velocidad, miSprite.getY());
 	}
 	
 	public void visit(Planta p) {

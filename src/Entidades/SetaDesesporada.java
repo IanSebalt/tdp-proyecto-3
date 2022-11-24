@@ -10,10 +10,10 @@ import Juego.Juego;
 
 public class SetaDesesporada extends PlantaDisparadora {
 	public SetaDesesporada(Coordenada c) {
-		segundos = 0;//Setear segundos;
-		dmg = 15;//Setear dmg;
+		segundos = 0;
+		dmg = 15;
 		vida = 60;
-		costo = 50;
+		costo = 25;
 		coord = c;
 		ImageIcon img = new ImageIcon(getClass().getResource("/imagenes/setadesesporada.gif"));
 		miSprite = new Sprite(img);

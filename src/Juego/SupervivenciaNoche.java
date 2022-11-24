@@ -41,8 +41,8 @@ public class SupervivenciaNoche extends ModoDeJuego{
 	public void accionModo(int seg) {
 		cronometro += seg;
 		while(cantLapidas<3) {
-			int randomX = ThreadLocalRandom.current().nextInt(5, 9);
-			int randomY = ThreadLocalRandom.current().nextInt(0, 5);
+			int randomX = ThreadLocalRandom.current().nextInt(8, 9);
+			int randomY = ThreadLocalRandom.current().nextInt(0, 6);
 			Coordenada nuevaCor = new Coordenada(randomX, randomY);
 			if(cantLapidas == 0) {
 				lapidas [cantLapidas] = nuevaCor;
