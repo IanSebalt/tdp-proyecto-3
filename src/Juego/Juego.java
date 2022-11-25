@@ -257,8 +257,10 @@ public class Juego {
 	public boolean chequearLapida(int x, int y) {
 		boolean retornar = false;
 		Coordenada [] laps = getLapidas();
-		for(int i = 0; i < laps.length && !retornar; i++) 
-			retornar = laps[i].getX() == x && laps[i].getY() == y;
+		for(int i = 0; i < laps.length && !retornar; i++) {
+			if( laps[i] != null)
+				retornar = laps[i].getX() == x && laps[i].getY() == y;	
+		}
 		return retornar;
 	}
 	
